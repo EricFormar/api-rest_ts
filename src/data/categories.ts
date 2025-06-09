@@ -1,0 +1,139 @@
+export default [{
+        "id": 1,
+        "name": "Vehiculos",
+        "subcategories": [
+            "Accesorios para Autos",
+            "Autos",
+            "Motos",
+            "Otros Vehículos",
+            "Camiones - Vehículos Comerciales"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Propiedades",
+        "subcategories": [
+            "Departamentos - Casas - VENTA",
+            "Departamentos - Casas - ALQUILER",
+            "Alquiler temporario",
+            "Inmuebles comerciales - VENTA",
+            "Inmuebles comerciales - ALQUILER",
+            "Estacionameinto - Cocheras - VENTA",
+            "Estacionamiento - Cocheras - ALQUILER",
+            "Terrenos - VENTA",
+            "Emprendimientos - VENTA"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Electrónica",
+        "subcategories": [
+            "Audio",
+            "TV",
+            "Video",
+            "Computadoras de Escritorio",
+            "Notebooks",
+            "Netbooks",
+            "Consolas",
+            "Camaras",
+            "Videocámaras"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Telefonía",
+        "subcategories": [
+            "Celulares - Teléfonos",
+            "Accesorios para celulares",
+            "Tablets"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Hogar",
+        "subcategories": [
+            "Muebles",
+            "Decoración - Jardín - Accesorios",
+            "Electrodomésticos"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Aire Libre",
+        "subcategories": [
+            "Bicicletas - Ciclismo",
+            "Otros Deportes",
+            "Fútbol",
+            "Aerobics y Fitness",
+            "Camping y Pesca",
+            "Deportes Extremos - Acuáticos"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Moda - Belleza",
+        "subcategories": [
+            "Ropa y Calzado",
+            "Relojes - Joyas - Accesorios",
+            "Salud - Belleza"
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Bebés y Niños",
+        "subcategories": [
+            "Ropa de Bebés y Niños",
+            "Cunas - Cochecitos - Accesorios",
+            "Juegos y Juguetes"
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Hobbies - Música - Arte - Libros",
+        "subcategories": [
+            "Libros y Revistas",
+            "Arte - Antigüedades",
+            "Instrumentos Musicales",
+            "CDs - DVDs"
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Animales - Mascotas",
+        "subcategories": [
+            "Perros - Gatos",
+            "Accesorios para Mascotas",
+            "Otros Animales"
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Herramientas, Industria y Oficina",
+        "subcategories": [
+            "Herramientas",
+            "Industria",
+            "Muebles para Negocios y Oficinas"
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Trabajo y Empleo",
+        "subcategories": [
+            "Ofertas de Trabajo",
+            "Busqueda de Trabajo - CVs"
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Servicios",
+        "subcategories": [
+            "Clases - Cursos",
+            "Reparaciones - Técnicos",
+            "Organización de eventos",
+            "Transporte - Mudanzas",
+            "Servicio Doméstico - Limpieza",
+            "Turismo - Paquetes turísticos",
+            "Otros Servicios"
+        ]
+    }
+]
