@@ -7,7 +7,9 @@
     "build": "tsc",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/app.ts",
     "db:create": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
-    "db:reset": "sequelize db:drop && npm run db:create"
+    "db:reset": "sequelize db:drop && npm run db:create",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [],
   "author": "",
