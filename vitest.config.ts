@@ -1,0 +1,15 @@
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  test: {
+    globals: true, // Permite usar 'describe', 'it', 'expect' sin importarlos
+    environment: 'node',
+    coverage: {
+      provider: 'v8', // o 'istanbul'
+      reporter: ['text', 'json', 'html'],
+      include: ['src/**/*.ts'],
+      exclude: ['src/app.ts', 'src/config/*', 'src/routes/*'] // Excluir archivos que no requieren cobertura de tests unitarios
+    },
+    setupFiles: ['./src/tests/setup.ts'], // Archivo para configuración global de tests
+  },
+});

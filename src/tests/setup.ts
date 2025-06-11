@@ -1,0 +1,1 @@
+// Por ejemplo, aquí podrías configurar variables de entorno de prueba o conectar a una base de datos de prueba
