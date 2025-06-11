@@ -1,19 +1,55 @@
 import path from "path";
-import express from "express";
 import dotenv from "dotenv";
 dotenv.config({
   path: path.resolve(__dirname, "./environments/.env"),
 });
-
+import express, { NextFunction, Request, Response } from "express";
 import { NODE_ENV, PORT } from "./env";
 
+import brandRoutes from "./routes/brand.routes";
+import categoryRoutes from "./routes/category.routes";
+import sectionRoutes from "./routes/section.routes";
+import productRoutes from "./routes/product.routes";
+import subCategoryRoutes from "./routes/subcategory.routes";
+
 const app = express();
+
+// Middlewares
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get("/hello", (req, res) => {
-  res.json("¡Hola, mundo!!!!");
+// Routes
+app.get("/", (req, res) => {
+  res.json({
+    ok: true,
+    message: "API RESTful con TypeScript y Express",
+  });
 });
 
+app.use("/api/brands", brandRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/sections", sectionRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/subcategories", subCategoryRoutes);
+
+// 404
+app.use((req, res) => {
+  res.status(404).json({
+    ok: false,
+    message: "Recurso no encontrado",
+  });
+});
+
+// Error handling
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+  res.status(500).json({
+    ok: false,
+    message: "Error interno del servidor",
+  });
+});
+
+// Start server
 try {
   app.listen(PORT, () => {
     console.log(
