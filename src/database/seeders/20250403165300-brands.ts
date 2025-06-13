@@ -8,7 +8,7 @@ import brandsJSON from '../../data/brands.json';
 
 export = {
   async up (queryInterface : QueryInterface, Sequelize : Sequelize) {
-    const brands = brandsJSON.map((brand : BrandAttributes) => ({
+    const brands = brandsJSON.map((brand) => ({
       name: brand.name,
       image: null,
       createdAt: new Date(),
