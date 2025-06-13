@@ -11,6 +11,7 @@ import categoryRoutes from "./routes/category.routes";
 import sectionRoutes from "./routes/section.routes";
 import productRoutes from "./routes/product.routes";
 import subCategoryRoutes from "./routes/subcategory.routes";
+import sequelizeConnection from "./database/connection";
 
 const app = express();
 
@@ -48,6 +49,16 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     message: "Error interno del servidor",
   });
 });
+
+// Database connection
+sequelizeConnection
+  .authenticate()
+  .then(() => {
+    console.log("Base de datos conectada");
+  })
+  .catch((error) => {
+    console.error("Error al conectar a la base de datos:", error);
+  });
 
 // Start server
 try {
