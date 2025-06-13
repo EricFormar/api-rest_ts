@@ -7,9 +7,10 @@ export interface BrandAttributes{
   name: string;
   image: string | null;
 
-  updatedAt?: Date;
-  deletedAt?: Date;
-  createdAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt?: Date | null;
+  
 }
 
 class Brand extends Model<BrandAttributes> implements BrandAttributes {
