@@ -20,6 +20,8 @@ export const {
     DB_PASSWORD,
     DB_NAME,
     DB_DIALECT,
+    DB_STORAGE,
+    DB_LOGGING,
     INIT_PASSWORD
 } = process.env;
 
@@ -30,7 +32,9 @@ export default {
         username: DB_USERNAME || 'root',
         password: DB_PASSWORD || '',
         name: DB_NAME || 'test',
-        dialect: DB_DIALECT || 'mysql'
+        dialect: DB_DIALECT || 'mysql',
+        storage: DB_STORAGE || ':memory:',
+        logging: DB_LOGGING || false,
     }
 }
 

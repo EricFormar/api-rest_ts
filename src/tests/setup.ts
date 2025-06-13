@@ -1,13 +1,10 @@
 // Por ejemplo, aquí podrías configurar variables de entorno de prueba o conectar a una base de datos de prueba
 
 // database.test.ts
-import { Sequelize, DataTypes, QueryInterface } from 'sequelize';
+import { DataTypes } from 'sequelize';
+import sequelizeConnection from '../database/connection';
 
-const sequelize = new Sequelize({ 
-  dialect : 'sqlite',
-  storage: ':memory:', 
-  logging: false 
-});
+const sequelize = sequelizeConnection;
 
 export const queryInterface = sequelize.getQueryInterface();
 export const DataTypesTest = DataTypes; // Exporta DataTypes para que pueda ser usado en el test

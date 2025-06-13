@@ -51,7 +51,7 @@ describe("Migration: Create Brands Table", () => {
   it("should insert a new brand", async () => {
     const newBrand = await getBrandMock();
     expect(newBrand).toBeDefined();
-    expect(newBrand.name).toBe("Test Brand");
+    expect(newBrand.name).equal("Test Brand");
   });
 
   it("should drop the Brands table when migrating down", async () => {
