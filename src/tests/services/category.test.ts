@@ -17,13 +17,19 @@ describe("Category Service", () => {
     })
 
     it("should get all categories", async () => {
-        await getCategoryMock();
+        await getCategoryMock({
+            id : 1,
+            name : "Test Category"
+        });
         const categories = await categoryService.getAllCategories();
         expect(categories.length).toBeGreaterThan(0);
     });
 
     it("should get category by id", async () => {
-        await getCategoryMock();
+        await getCategoryMock({
+            id : 1,
+            name : "Test Category"
+        });
         const category = await categoryService.getCategoryById(1);
         expect(category).toBeDefined();
     })
