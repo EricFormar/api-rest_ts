@@ -4,7 +4,7 @@ import migration from "../../database/migrations/20250607142315-address";
 import Address from "../../database/models/address";
 import { AddressAttributes } from "../../database/models/address";
 
-export const getAddressMock = async (data : AddressAttributes
+export const getAddressMock = async (data : Partial<AddressAttributes>
 ): Promise<Address> => {
   await migration.up(queryInterface as QueryInterface, DataTypesTest);
 
