@@ -4,14 +4,12 @@ import { queryInterface, DataTypesTest } from "../setup";
 import migration from "../../database/migrations/20250607141656-rol";
 import { QueryInterface } from "sequelize";
 import { getRolMock } from "../mocks/rol.mock";
+import { getRandomNumber } from "../../utils/getRandomNumber";
 
 describe("Migration: Create Rols Table", () => {
+
   beforeEach(async () => {
-    try {
-      await queryInterface.dropTable("Rols");
-    } catch (error) {
-      // Ignorar si la tabla no existe, es la primera ejecución
-    }
+    await migration.up(queryInterface, DataTypesTest);
   });
 
   afterEach(async () => {
@@ -19,8 +17,6 @@ describe("Migration: Create Rols Table", () => {
   });
 
   it("should create the Rols table with correct columns", async () => {
-    // Aplica la migración
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
 
     // Verifica que la tabla 'Rols' existe
     const tables = await queryInterface.showAllTables();
@@ -54,15 +50,16 @@ describe("Migration: Create Rols Table", () => {
 
   it("should create the Rols table with correct columns", async () => {
     
-    const newRol = await getRolMock();
+    const newRol = await getRolMock({
+      id : getRandomNumber(1,10),
+      name : "Test Rol"
+    });
 
     expect(newRol).toBeDefined();
     expect(newRol.name).toBe("Test Rol");
   });
 
   it("should drop the Rols table when migrating down", async () => {
-    // Primero, aplica la migración
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
 
     // Verifica que la tabla existe antes de revertir
     let tables = await queryInterface.showAllTables();

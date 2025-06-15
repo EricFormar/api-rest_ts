@@ -2,19 +2,12 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../setup"; // Importa la configuración de la DB de prueba
 import migration from "../../database/migrations/20250607105742-category"; // Ajusta la ruta a tu archivo de migración
-import { QueryInterface } from "sequelize";
 import { getCategoryMock } from "../mocks/category.mock";
 
 describe("Migration: Create Categories Table", () => {
   beforeEach(async () => {
-    // Antes de cada test, asegura que la base de datos esté limpia
-    // Esto es importante si tus tests no son completamente aislados (por ejemplo, si no usas `force: true` en sequelize.sync)
-    // Para migraciones, es común revertir y aplicar de nuevo
-    try {
-      await queryInterface.dropTable("Categories");
-    } catch (error) {
-      // Ignorar si la tabla no existe, es la primera ejecución
-    }
+    await migration.up(queryInterface, DataTypesTest);
+
   });
 
   afterEach(async () => {
@@ -23,8 +16,6 @@ describe("Migration: Create Categories Table", () => {
   });
 
   it("should create the Categories table with correct columns", async () => {
-    // Aplica la migración
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
 
     // Verifica que la tabla 'Categories' existe
     const tables = await queryInterface.showAllTables();
@@ -59,15 +50,16 @@ describe("Migration: Create Categories Table", () => {
   });
 
   it("should create a new category", async () => {
-    const newCategory = await getCategoryMock();
+    const newCategory = await getCategoryMock({
+      name : "Test Category",
+      image : "test.jpg",
+    });
     expect(newCategory).toBeDefined();
     expect(newCategory.name).toBe("Test Category");
     expect(newCategory.image).toBe("test.jpg");
   });
 
   it("should drop the Categories table when migrating down", async () => {
-    // Primero, aplica la migración
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
 
     // Verifica que la tabla existe antes de revertir
     let tables = await queryInterface.showAllTables();

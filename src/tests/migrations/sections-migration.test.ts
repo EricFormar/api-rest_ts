@@ -2,16 +2,12 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../setup"; // Importa la configuración de la DB de prueba
 import migration from "../../database/migrations/20250607110120-section"; // Ajusta la ruta a tu archivo de migración
-import { QueryInterface } from "sequelize";
 import { getSectionMock } from "../mocks/section.mock";
+import { getRandomNumber } from "../../utils/getRandomNumber";
 
 describe("Migration: Create Sections Table", () => {
   beforeEach(async () => {
-    try {
-      await queryInterface.dropTable("Sections");
-    } catch (error) {
-      // Ignorar si la tabla no existe, es la primera ejecución
-    }
+    await migration.up(queryInterface, DataTypesTest);
   });
 
   afterEach(async () => {
@@ -19,8 +15,6 @@ describe("Migration: Create Sections Table", () => {
   });
 
   it("should create the Sections table with correct columns", async () => {
-    // Aplica la migración
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
 
     // Verifica que la tabla 'Sections' existe
     const tables = await queryInterface.showAllTables();
@@ -53,16 +47,16 @@ describe("Migration: Create Sections Table", () => {
   });
 
   it("should insert a new section", async () => {
-    const newSection = await getSectionMock();
+    const newSection = await getSectionMock({
+      id : getRandomNumber(1,10),
+      name : "Test Section"
+    });
 
     expect(newSection).toBeDefined();
     expect(newSection.name).toBe("Test Section");
   });
 
   it("should drop the Sections table when migrating down", async () => {
-    // Primero, aplica la migración
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
-
     // Verifica que la tabla existe antes de revertir
     let tables = await queryInterface.showAllTables();
     expect(tables).toContain("Sections");

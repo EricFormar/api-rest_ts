@@ -1,23 +1,17 @@
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../setup";
-import migration from "../../database/migrations/20250607142315-address"
+import migration from "../../database/migrations/20250607142315-address";
 import migrationUser from "../../database/migrations/20250607141756-user";
 import migrationRol from "../../database/migrations/20250607141656-rol";
-
 import { QueryInterface } from "sequelize";
 import { getAddressMock } from "../mocks/address.mock";
-
-
+import { getUserMock } from "../mocks/user.mock";
+import { getRolMock } from "../mocks/rol.mock";
 
 describe("Migration: Create Addresses Table", () => {
   beforeEach(async () => {
-
-    try {
-      await queryInterface.dropTable("Addresses");
-    } catch (error) {
-      // Ignorar si la tabla no existe, es la primera ejecución
-    }
+    await migration.up(queryInterface, DataTypesTest);
   });
 
   afterEach(async () => {
@@ -72,17 +66,38 @@ describe("Migration: Create Addresses Table", () => {
   });
 
   it("create a new address", async () => {
-    const newAddress = await getAddressMock();
+    await migrationRol.up(queryInterface as QueryInterface, DataTypesTest);
+    const newRol = await getRolMock({
+      id: 1,
+      name: "any rol",
+    });
+    await migrationUser.up(queryInterface as QueryInterface, DataTypesTest);
+    const newUser = await getUserMock({
+      name : "any name",
+      rolId: newRol.id,
+    });
+
+    const newAddress = await getAddressMock({
+      id: 1,
+      location: "any location",
+      city: "any city",
+      province: "any province",
+      country: "any country",
+      postalCode: "any postal code",
+      userId: newUser.id,
+    });
        
     expect(newAddress).toBeDefined();
-    expect(newAddress.location).toBe("Test Location");
-    expect(newAddress.city).toBe("Test City");
-    expect(newAddress.province).toBe("Test Province");
-    expect(newAddress.country).toBe("Test Country");
-    expect(newAddress.postalCode).toBe("Test Postal Code");
-    expect(newAddress.userId).toBe(1);
+    expect(newAddress.location).toBe("any location");
+    expect(newAddress.city).toBe("any city");
+    expect(newAddress.province).toBe("any province");
+    expect(newAddress.country).toBe("any country");
+    expect(newAddress.postalCode).toBe("any postal code");
+    expect(newAddress.userId).toBe(newUser.id);
     expect(newAddress.createdAt).toBeDefined();
     expect(newAddress.updatedAt).toBeDefined();
+
+    await migrationUser.down(queryInterface, DataTypesTest);
   })
 
   it("should drop the Addresses table when migrating down", async () => {
