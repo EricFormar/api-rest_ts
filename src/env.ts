@@ -4,7 +4,6 @@ import path from 'path';
 type TypeMode = 'development' | 'production' | 'test';
 const mode : TypeMode = process.env.NODE_ENV as TypeMode || 'development';
 
-console.log(`Mode: ${mode}`);
 if(!['development', 'production', 'test'].includes(mode)) {
     throw new Error('Invalid mode');
 }
