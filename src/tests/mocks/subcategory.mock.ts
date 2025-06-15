@@ -1,62 +1,15 @@
-import { Model, QueryInterface } from "sequelize";
-import { DataTypesTest, queryInterface, sequelizeInstance } from "../setup";
-import migration from "../../database/migrations/20250607110406-subcategory";
-import { getCategoryMock } from "./category.mock";
+import SubCategory, { SubCategoryAttributes } from "../../database/models/subcategory";
+import { getRandomNumber } from "../../utils/getRandomNumber";
 
-export interface ISubCategory extends Model {
-  id: number;
-  name: string;
-  image: string;
-  categoryId: number;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date | null;
-}
+export const getSubCategoryMock = async (data : Partial<SubCategoryAttributes>) : Promise<SubCategory> => {
 
-export const getSubCategoryMock = async () => {
-  await migration.up(queryInterface as QueryInterface, DataTypesTest);
+  const {id, name, image, categoryId} = data;
 
-  const newCategory = await getCategoryMock();
-
-
-  const SubCategories = sequelizeInstance.define<ISubCategory>(
-    "SubCategory",
-    {
-      id: {
-        type: DataTypesTest.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-      },
-      name: {
-        type: DataTypesTest.STRING,
-      },
-      image: {
-        type: DataTypesTest.STRING,
-      },
-      categoryId: {
-        type: DataTypesTest.INTEGER,
-      },
-      createdAt: {
-        type: DataTypesTest.DATE,
-        allowNull: false,
-      },
-      updatedAt: {
-        type: DataTypesTest.DATE,
-        allowNull: false,
-      },
-      deletedAt: {
-        type: DataTypesTest.DATE,
-        allowNull: true,
-      },
-    },
-    { timestamps: true, paranoid: true }
-  );
-
-  const newSubCategory = await SubCategories.create({
-    name: "Test SubCategory",
-    image: "test.jpg",
-    categoryId : newCategory.id,
+  const newSubCategory = await SubCategory.create({
+    id : id || getRandomNumber(1,1000),
+    name : name || "any category",
+    image : image || "any image",
+    categoryId : categoryId || getRandomNumber(1,1000),
   });
 
   return newSubCategory;
