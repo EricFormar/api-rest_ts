@@ -1,79 +1,25 @@
-import { Model, QueryInterface } from "sequelize";
-import { getUserMock } from "./user.mock";
-import { DataTypesTest, queryInterface, sequelizeInstance } from "../setup";
+import { QueryInterface } from "sequelize";
+import { DataTypesTest, queryInterface } from "../setup";
 import migration from "../../database/migrations/20250607142315-address";
+import Address from "../../database/models/address";
+import { AddressAttributes } from "../../database/models/address";
 
-export interface IAddress extends Model {
-  id: number;
-  location: string;
-  city: string;
-  province: string;
-  country: string;
-  postalCode: string;
-  userId: number;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date | null;
-}
-
-export const getAddressMock = async (): Promise<IAddress> => {
+export const getAddressMock = async (data : AddressAttributes
+): Promise<Address> => {
   await migration.up(queryInterface as QueryInterface, DataTypesTest);
 
-  const newUser = await getUserMock();
+  const {id, location, city, province, country, postalCode, userId} = data ;
 
-  const Addresses = sequelizeInstance.define<IAddress>(
-    "Address",
-    {
-      id: {
-        type: DataTypesTest.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-      },
-      location: {
-        type: DataTypesTest.STRING,
-      },
-      city: {
-        type: DataTypesTest.STRING,
-      },
-      province: {
-        type: DataTypesTest.STRING,
-      },
-      country: {
-        type: DataTypesTest.STRING,
-      },
-      postalCode: {
-        type: DataTypesTest.STRING,
-      },
-      lock: {
-        type: DataTypesTest.BOOLEAN,
-      },
-      userId: {
-        type: DataTypesTest.INTEGER,
-      },
-      createdAt: {
-        type: DataTypesTest.DATE,
-        allowNull: false,
-      },
-      updatedAt: {
-        type: DataTypesTest.DATE,
-        allowNull: false,
-      },
-      deletedAt: {
-        type: DataTypesTest.DATE,
-        allowNull: true,
-      },
-    },
-    { timestamps: true, paranoid: true }
-  );
-
-  const newAddress = await Addresses.create({
-    location: "Test Location",
-    city: "Test City",
-    province: "Test Province",
-    country: "Test Country",
-    postalCode: "Test Postal Code",
-    userId: newUser.id,
+  const newAddress = await Address.create({
+    id : id || 1,
+    location: location || "any location",
+    city: city || "any city",
+    province: province || "any province",
+    country: country || "any country",
+    postalCode: postalCode || "any postal code",
+    userId: userId || 1,
+    createdAt : new Date,
+    updatedAt : new Date,
   });
   return newAddress;
 };
