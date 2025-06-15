@@ -15,7 +15,7 @@ export = {
     ) as unknown as [CategoryAttributes[],[]];
     const categories : CategoryAttributes[] = result[0];
 
-    const subcategories : SubCategoryAttributes[] = [];
+    const subcategories : Partial<SubCategoryAttributes>[] = [];
     
     categoriesData.forEach(category => {
       // Find the corresponding category ID
