@@ -3,16 +3,16 @@ import connection from '../connection';
 import Order from './order';
 import Product from './product';
 
-interface ItemAttributes{
+export interface ItemAttributes{
 
   id: number;
   quantity: number;
   productId: number;
   orderId: number;
 
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
   deletedAt?: Date;
-  createdAt?: Date;
 }
 
 class Item extends Model<ItemAttributes> implements ItemAttributes {
@@ -50,10 +50,12 @@ Item.init(
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     updatedAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     deletedAt: {
       allowNull: true,
@@ -67,10 +69,6 @@ Item.init(
 );
 
 // associates
-Item.belongsTo(Order,{
-  as: 'order',
-  foreignKey: 'orderId'
-});
 
 Item.belongsTo(Product,{
   as: 'product',

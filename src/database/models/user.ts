@@ -13,9 +13,9 @@ export interface UserAttributes {
   validated: boolean;
   rolId: number;
 
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
   deletedAt?: Date;
-  createdAt?: Date;
 }
 
 class User extends Model<UserAttributes> implements UserAttributes {
@@ -81,15 +81,22 @@ User.init(
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     updatedAt: {
       allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    deletedAt: {
+      allowNull: true,
       type: DataTypes.DATE,
     },
   },
   {
     sequelize: connection,
     modelName: 'User',
+    
   }
 );
 

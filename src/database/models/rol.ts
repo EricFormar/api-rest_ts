@@ -1,14 +1,14 @@
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
 
-interface RolAttributes{
+export interface RolAttributes{
 
   id: number;
   name: string;
 
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
   deletedAt?: Date;
-  createdAt?: Date;
 }
 
 class Rol extends Model<RolAttributes> implements RolAttributes {
@@ -36,10 +36,12 @@ Rol.init(
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     updatedAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     deletedAt: {
       allowNull: true,
