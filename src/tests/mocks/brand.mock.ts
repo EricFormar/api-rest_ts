@@ -1,16 +1,12 @@
-import { QueryInterface } from "sequelize";
-import { DataTypesTest, queryInterface } from "../setup";
-import migration from "../../database/migrations/20250607110250-brand";
-import Brand  from "../../database/models/brand";
+import Brand, { BrandAttributes }  from "../../database/models/brand";
 
-export const getBrandMock = async () => {
-
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
+export const getBrandMock = async (data : Partial<BrandAttributes>) => {
   
+  const {id, name, image} = data;
       const newBrand = await Brand.create({
-        id: 1,
-        name: "Test Brand",
-        image: "test.jpg",
+        id : id || 1,
+        name : name || "any name",
+        image : image || "any image",
         createdAt : new Date,
         updatedAt : new Date
       });

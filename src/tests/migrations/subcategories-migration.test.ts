@@ -1,17 +1,14 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../setup";
 import migration from "../../database/migrations/20250607110406-subcategory";
-import { QueryInterface } from "sequelize";
+import migrationCategoy from "../../database/migrations/20250607105742-category"; // Ajusta la ruta a tu archivo de migración
 import { getSubCategoryMock } from "../mocks/subcategory.mock";
+import { getCategoryMock } from "../mocks/category.mock";
+import { getRandomNumber } from "../../utils/getRandomNumber";
 
 describe("Migration: Create Subcategories Table", () => {
   beforeEach(async () => {
-
-    try {
-      await queryInterface.dropTable("Subcategories");
-    } catch (error) {
-      // Ignorar si la tabla no existe, es la primera ejecución
-    }
+    await migration.up(queryInterface, DataTypesTest);
   });
 
   afterEach(async () => {
@@ -19,9 +16,7 @@ describe("Migration: Create Subcategories Table", () => {
   });
 
   it("should create the Subcategories table with correct columns", async () => {
-  
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
-  
+    
     const tables = await queryInterface.showAllTables();
     expect(tables).toContain("Subcategories");
 
@@ -56,16 +51,29 @@ describe("Migration: Create Subcategories Table", () => {
   });
 
   it("should insert a new Subcategory into the Subcategories table", async () => {
-    const newSubCategory = await getSubCategoryMock();
+    await migrationCategoy.up(queryInterface, DataTypesTest);
+    const newCategory = await getCategoryMock({
+      id : getRandomNumber(1,10),
+    })
+    
+    const newSubCategory = await getSubCategoryMock({
+      id: 1,
+      name: "Test SubCategory",
+      image: "test-image.jpg",
+      categoryId: newCategory.id,
+    });
+
     expect(newSubCategory).toBeDefined();
+    expect(newSubCategory.id).toBe(1);
     expect(newSubCategory.name).toBe("Test SubCategory");
-  
+    expect(newSubCategory.image).toBe("test-image.jpg");
+    expect(newSubCategory.categoryId).toBe(newCategory.id);
+    await migration.down(queryInterface, DataTypesTest);
+    await migrationCategoy.down(queryInterface, DataTypesTest);
   });
 
   it("should drop the Subcategories table when migrating down", async () => {
-  
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
-  
+    
     let tables = await queryInterface.showAllTables();
     expect(tables).toContain("Subcategories");
   

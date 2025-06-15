@@ -9,7 +9,7 @@ export interface BrandAttributes{
 
   createdAt: Date;
   updatedAt: Date;
-  deletedAt?: Date | null;
+  deletedAt?: Date;
   
 }
 
@@ -43,10 +43,12 @@ Brand.init(
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     updatedAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     deletedAt: {
       allowNull: true,

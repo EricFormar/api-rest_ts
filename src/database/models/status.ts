@@ -1,13 +1,15 @@
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
 
-interface StatusAttributes{
+export interface StatusAttributes{
 
   id: number;
   name: string;
-  updatedAt?: Date;
+  
+  createdAt: Date;
+  updatedAt: Date;
   deletedAt?: Date;
-  createdAt?: Date;
+  
 }
 
 class Status extends Model<StatusAttributes> implements StatusAttributes {
@@ -35,10 +37,12 @@ Status.init(
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     updatedAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     deletedAt: {
       allowNull: true,

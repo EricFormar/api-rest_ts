@@ -6,6 +6,7 @@ import { DataTypesTest, queryInterface } from "../setup";
 import { QueryInterface } from "sequelize";
 import Brand from "../../database/models/brand";
 import { BadRequestError, NotFoundError } from "../../errors/HttpError";
+import { getRandomNumber } from "../../utils/getRandomNumber";
 
 describe("brand.service", () => {
     const brandService = new BrandService();
@@ -22,7 +23,10 @@ describe("brand.service", () => {
 
     // Obtener todos los brands
     it("getAll", async () => {
-        await getBrandMock();
+        await getBrandMock({
+            id : 1,
+            name : "Test Brand"
+        });
         const brands = await brandService.getAllBrands();
         expect(brands.length).toBeGreaterThan(0);
     })
@@ -37,14 +41,20 @@ describe("brand.service", () => {
 
     // Obtener brand por id
     it("getById", async () => {
-        await getBrandMock();
+        await getBrandMock({
+            id : 1,
+            name : "Test Brand"
+        });
         const brand = await brandService.getBrandById(1);
         expect(brand).toBeDefined();
     })
 
     // Checar errores al obtener brand por id
     it("getByIdErrors", async () => {
-        await getBrandMock();
+        await getBrandMock({
+            id: 1,
+            name : "Test Brand"
+        });
         await expect(brandService.getBrandById(2)).rejects.toThrow(NotFoundError);
     })
 
@@ -72,7 +82,10 @@ describe("brand.service", () => {
 
     // Actualizar brand
     it("update", async () => {
-        await getBrandMock();
+        await getBrandMock({
+            id : 1,
+            name : "Test Brand"
+        });
         const data: BrandModelRequest = {
             name: "Test Brand updated",
             image: "test.jpg",
@@ -84,7 +97,10 @@ describe("brand.service", () => {
 
     // Checar errores al actualizar brand
     it("updateErrors", async () => {
-        await getBrandMock();
+        await getBrandMock({
+            id : 1,
+            name : "Test Brand"
+        });
         const badData = {
             name: "",
             image: "",
@@ -100,7 +116,10 @@ describe("brand.service", () => {
 
     // Eliminar brand
     it("delete", async () => {
-        await getBrandMock();
+        await getBrandMock({
+            id : 1,
+            name : "Test Brand"
+        });
         const response = await brandService.deleteBrand(1);
         expect(response).toBeDefined();
         expect(response).toBe(1);
@@ -108,7 +127,10 @@ describe("brand.service", () => {
 
     // Checar errores al eliminar brand
     it("deleteErrors", async () => {
-        await getBrandMock();
+        await getBrandMock({
+            id : 1,
+            name : "Test Brand"
+        });
         await expect(brandService.deleteBrand(2)).rejects.toThrow(NotFoundError);
     })
 })

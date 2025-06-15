@@ -3,7 +3,7 @@ import connection from '../connection';
 
 export interface SubCategoryAttributes{
 
-  id?: number;
+  id: number;
   name: string;
   image: string | null;
   categoryId: number;

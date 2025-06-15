@@ -4,16 +4,16 @@ import User from './user';
 import Status from './status';
 import Item from './item';
 
-interface OrderAttributes{
+export interface OrderAttributes{
 
   id: number;
   total: number;
   statusId: number;
   userId: number;
-
-  updatedAt?: Date;
+  
+  createdAt: Date;
+  updatedAt: Date;
   deletedAt?: Date;
-  createdAt?: Date;
 }
 
 class Order extends Model<OrderAttributes> implements OrderAttributes {
@@ -51,10 +51,12 @@ Order.init(
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     updatedAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     deletedAt: {
       allowNull: true,

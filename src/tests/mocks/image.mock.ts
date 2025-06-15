@@ -1,55 +1,14 @@
-import { Model, QueryInterface } from "sequelize";
-import { DataTypesTest, queryInterface, sequelizeInstance } from "../setup";
-import migration from "../../database/migrations/20250607111049-image";
-import { getProductMock } from "./product.mock";
+import Image, { ImageAttributes } from "../../database/models/image";
 
-export interface IImage extends Model {
-  id: number;
-  file: string;
-  productId: number;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date | null;
-}
+export const getImageMock = async (data : Partial<ImageAttributes>) : Promise<Image> => {
 
-export const getImageMock = async () => {
-  await migration.up(queryInterface as QueryInterface, DataTypesTest);
-
-  const newProduct = await getProductMock();
-
-  const Images = sequelizeInstance.define<IImage>(
-    "Images",
-    {
-      id: {
-        type: DataTypesTest.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-      },
-      file: {
-        type: DataTypesTest.STRING,
-      },
-      productId: {
-        type: DataTypesTest.STRING,
-      },
-      createdAt: {
-        type: DataTypesTest.DATE,
-        allowNull: false,
-      },
-      updatedAt: {
-        type: DataTypesTest.DATE,
-        allowNull: false,
-      },
-      deletedAt: {
-        type: DataTypesTest.DATE,
-        allowNull: true,
-      },
-    },
-    { timestamps: true, paranoid: true }
-  );
-  const newImage = await Images.create({
-    file: "test.jpg",
-    productId: newProduct.id,
+  const {id, file, productId} = data
+  const newImage = await Image.create({
+    id : id || 1,
+    file : file || "any file",
+    productId : productId || 1,
+    createdAt : new Date,
+    updatedAt : new Date,
   });
   return newImage;
 };

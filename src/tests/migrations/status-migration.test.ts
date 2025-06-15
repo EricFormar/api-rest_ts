@@ -1,14 +1,12 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../setup";
 import migration from "../../database/migrations/20250607142616-status";
-import { QueryInterface } from "sequelize";
 import { getStatusMock } from "../mocks/status.mock";
+import { getRandomNumber } from "../../utils/getRandomNumber";
 
 describe("Migration: Create Statuses Table", () => {
   beforeEach(async () => {
-    try {
-      await queryInterface.dropTable("Statuses");
-    } catch (error) {}
+    await migration.up(queryInterface, DataTypesTest);
   });
 
   afterEach(async () => {
@@ -16,7 +14,6 @@ describe("Migration: Create Statuses Table", () => {
   });
 
   it("should create the Statuses table with correct columns", async () => {
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
 
     const tables = await queryInterface.showAllTables();
     expect(tables).toContain("Statuses");
@@ -46,14 +43,16 @@ describe("Migration: Create Statuses Table", () => {
   });
 
   it("should create the Statuses table with correct indexes", async () => {
-    const newStatus = await getStatusMock();
+    const newStatus = await getStatusMock({
+      id : getRandomNumber(1,10),
+      name : "Test Status"
+    });
 
     expect(newStatus).toBeDefined();
     expect(newStatus.name).toBe("Test Status");
   });
 
   it("should drop the Statuses table when migrating down", async () => {
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
 
     let tables = await queryInterface.showAllTables();
     expect(tables).toContain("Statuses");

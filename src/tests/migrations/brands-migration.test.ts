@@ -1,14 +1,11 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../setup";
 import migration from "../../database/migrations/20250607110250-brand";
-import { QueryInterface } from "sequelize";
 import { getBrandMock } from "../mocks/brand.mock";
 
 describe("Migration: Create Brands Table", () => {
   beforeEach(async () => {
-    try {
-      await queryInterface.dropTable("Brands");
-    } catch (error) {}
+    await migration.up(queryInterface, DataTypesTest);
   });
 
   afterEach(async () => {
@@ -16,7 +13,6 @@ describe("Migration: Create Brands Table", () => {
   });
 
   it("should create the Brands table with correct columns", async () => {
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
 
     const tables = await queryInterface.showAllTables();
     expect(tables).toContain("Brands");
@@ -49,13 +45,15 @@ describe("Migration: Create Brands Table", () => {
   });
 
   it("should insert a new brand", async () => {
-    const newBrand = await getBrandMock();
+    const newBrand = await getBrandMock({
+      name : "Test Brand",
+      image : "any image"
+    });
     expect(newBrand).toBeDefined();
     expect(newBrand.name).equal("Test Brand");
   });
 
   it("should drop the Brands table when migrating down", async () => {
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
 
     let tables = await queryInterface.showAllTables();
     expect(tables).toContain("Brands");

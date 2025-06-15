@@ -41,7 +41,7 @@ export = {
         allowNull: false,
         defaultValue: false
       },
-      lock: {
+      locked: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false

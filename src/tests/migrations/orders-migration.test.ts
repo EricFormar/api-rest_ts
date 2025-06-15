@@ -2,19 +2,20 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../setup";
 import migration from "../../database/migrations/20250607142724-order";
-import { QueryInterface } from "sequelize";
+import migrationUser from "../../database/migrations/20250607141756-user";
+import migrationStatus from "../../database/migrations/20250607142616-status";
+import migrationRol from "../../database/migrations/20250607141656-rol";
 import { getOrderMock } from "../mocks/order.mock";
-
+import { getRandomNumber } from "../../utils/getRandomNumber";
+import { getUserMock } from "../mocks/user.mock";
+import { getStatusMock } from "../mocks/status.mock";
+import { getRolMock } from "../mocks/rol.mock";
 
 
 describe("Migration: Create Orders Table", () => {
+  
   beforeEach(async () => {
-
-    try {
-      await queryInterface.dropTable("Orders");
-    } catch (error) {
-      // Ignorar si la tabla no existe, es la primera ejecución
-    }
+    await migration.up(queryInterface, DataTypesTest);
   });
 
   afterEach(async () => {
@@ -22,9 +23,7 @@ describe("Migration: Create Orders Table", () => {
   });
 
   it("should create the Orders table with correct columns", async () => {
-  
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
-  
+    
     const tables = await queryInterface.showAllTables();
     expect(tables).toContain("Orders");
 
@@ -60,21 +59,43 @@ describe("Migration: Create Orders Table", () => {
   });
 
   it("create a new order", async () => {
-    const newAddress = await getOrderMock();
+
+    await migrationStatus.up(queryInterface, DataTypesTest);
+    await migrationRol.up(queryInterface, DataTypesTest);
+    await migrationUser.up(queryInterface, DataTypesTest);
+
+    const newStatus = await getStatusMock({
+      id : getRandomNumber(1,10),
+    });
+    const newRol = await getRolMock({
+      id: getRandomNumber(1,10)
+    })
+    const newUser = await getUserMock({
+      id: getRandomNumber(1,100),
+      rolId : newRol.id
+    });
+    const orderId = getRandomNumber(1,100);
+    const newOrder = await getOrderMock({
+      id: orderId,
+      total: 100,
+      statusId: newStatus.id,
+      userId: newUser.id,
+    });
        
-    expect(newAddress).toBeDefined();
-    expect(newAddress.id).toBe(1);
-    expect(newAddress.total).toBe(100);
-    expect(newAddress.statusId).toBe(1);
-    expect(newAddress.userId).toBe(1);
-    expect(newAddress.createdAt).toBeDefined();
-    expect(newAddress.updatedAt).toBeDefined();
+    expect(newOrder).toBeDefined();
+    expect(newOrder.id).toBe(orderId);
+    expect(newOrder.total).toBe(100);
+    expect(newOrder.statusId).toBe(newStatus.id);
+    expect(newOrder.userId).toBe(newUser.id);
+    expect(newOrder.createdAt).toBeDefined();
+    expect(newOrder.updatedAt).toBeDefined();
+
+    await migrationUser.down(queryInterface, DataTypesTest);
+    await migrationStatus.down(queryInterface, DataTypesTest);
   })
 
   it("should drop the Orders table when migrating down", async () => {
-  
-    await migration.up(queryInterface as QueryInterface, DataTypesTest);
-  
+    
     let tables = await queryInterface.showAllTables();
     expect(tables).toContain("Orders");
   

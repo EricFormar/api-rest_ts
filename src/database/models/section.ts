@@ -1,14 +1,14 @@
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
 
-interface SectionAttributes{
+export interface SectionAttributes{
 
   id: number;
   name: string;
-
+  
+  createdAt: Date;
   updatedAt?: Date;
   deletedAt?: Date;
-  createdAt?: Date;
 }
 
 class Section extends Model<SectionAttributes> implements SectionAttributes {
@@ -36,10 +36,12 @@ Section.init(
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     updatedAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     deletedAt: {
       allowNull: true,

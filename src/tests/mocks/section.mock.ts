@@ -1,6 +1,8 @@
 import { Model, QueryInterface } from "sequelize";
 import { DataTypesTest, queryInterface, sequelizeInstance } from "../setup";
 import migration from "../../database/migrations/20250607110120-section";
+import Section, { SectionAttributes } from "../../database/models/section";
+import { getRandomNumber } from "../../utils/getRandomNumber";
 
 export interface ISection extends Model {
   id: number;
@@ -10,39 +12,14 @@ export interface ISection extends Model {
   deletedAt?: Date | null;
 }
 
-export const getSectionMock = async () => {
-  await migration.up(queryInterface as QueryInterface, DataTypesTest);
+export const getSectionMock = async (data : Partial<SectionAttributes>) : Promise<Section> => {
 
-  const Sections = sequelizeInstance.define<ISection>(
-    "Section",
-    {
-      id: {
-        type: DataTypesTest.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-      },
-      name: {
-        type: DataTypesTest.STRING,
-      },
-      createdAt: {
-        type: DataTypesTest.DATE,
-        allowNull: false,
-      },
-      updatedAt: {
-        type: DataTypesTest.DATE,
-        allowNull: false,
-      },
-      deletedAt: {
-        type: DataTypesTest.DATE,
-        allowNull: true,
-      },
-    },
-    { timestamps: true, paranoid: true }
-  ); // Incluye timestamps y paranoid si los usas en tu modelo real
-
-  const newSection = await Sections.create({
-    name: "Test Section",
+  const {id, name} = data;
+  const newSection = await Section.create({
+    id : id || getRandomNumber(1,100),
+    name : name || "any name",
+    createdAt : new Date,
+    updatedAt : new Date,
   });
   return newSection;
 };

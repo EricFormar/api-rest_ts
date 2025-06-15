@@ -7,9 +7,9 @@ export interface ImageAttributes{
   file: string;
   productId: number;
 
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
   deletedAt?: Date;
-  createdAt?: Date;
 }
 
 class Image extends Model<ImageAttributes> implements ImageAttributes {
@@ -42,10 +42,12 @@ Image.init(
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     updatedAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     deletedAt: {
       allowNull: true,

@@ -2,7 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
 import User from './user';
 
-interface AddressAttributes{
+export interface AddressAttributes{
 
   id: number;
   location: string;
@@ -12,9 +12,9 @@ interface AddressAttributes{
   country: string;
   userId: number;
 
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
   deletedAt?: Date;
-  createdAt?: Date;
 }
 
 class Address extends Model<AddressAttributes> implements AddressAttributes {
@@ -67,10 +67,12 @@ Address.init(
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     updatedAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     deletedAt: {
       allowNull: true,
