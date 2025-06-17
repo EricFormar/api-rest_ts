@@ -10,6 +10,6 @@ export default defineConfig({
       include: ['src/**/*.ts'],
       exclude: ['src/app.ts', 'src/config/*', 'src/routes/*'] // Excluir archivos que no requieren cobertura de tests unitarios
     },
-    setupFiles: ['./src/tests/setup.ts'], // Archivo para configuración global de tests
+    setupFiles: ['./src/database/setup.ts'], // Archivo para configuración global de tests
   },
 });
