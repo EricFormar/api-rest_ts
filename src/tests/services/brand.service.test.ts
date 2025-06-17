@@ -2,11 +2,10 @@ import { describe, expect, it, afterEach, beforeEach, vi } from "vitest";
 import { BrandModelRequest, BrandService } from "../../services/brand.service";
 import migration from "../../database/migrations/20250607110250-brand";
 import { getBrandMock } from "../mocks/brand.mock";
-import { DataTypesTest, queryInterface } from "../setup";
+import { DataTypesTest, queryInterface } from "../../database/setup";
 import { QueryInterface } from "sequelize";
 import Brand from "../../database/models/brand";
 import { BadRequestError, NotFoundError } from "../../errors/HttpError";
-import { getRandomNumber } from "../../utils/getRandomNumber";
 
 describe("brand.service", () => {
     const brandService = new BrandService();

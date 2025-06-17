@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { CategoryService } from "../../services/category.service";
 import migration from "../../database/migrations/20250607105742-category";
-import { DataTypesTest, queryInterface } from "../setup";
+import { DataTypesTest, queryInterface } from "../../database/setup";
 import { QueryInterface } from "sequelize";
 import { getCategoryMock } from "../mocks/category.mock";
 
