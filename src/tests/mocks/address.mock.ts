@@ -8,16 +8,23 @@ export const getAddressMock = async (data : Partial<AddressAttributes>
 ): Promise<Address> => {
   await migration.up(queryInterface as QueryInterface, DataTypesTest);
 
-  const {id, location, city, province, country, postalCode, userId} = data ;
+  const {
+    id = 1, 
+    location = "any location", 
+    city = "any city", 
+    province = "any province", 
+    country = "any country", 
+    postalCode  = "any postal code", 
+    userId = 1} = data ;
 
   const newAddress = await Address.create({
-    id : id || 1,
-    location: location || "any location",
-    city: city || "any city",
-    province: province || "any province",
-    country: country || "any country",
-    postalCode: postalCode || "any postal code",
-    userId: userId || 1,
+    id,
+    location,
+    city,
+    province,
+    country,
+    postalCode,
+    userId,
     createdAt : new Date,
     updatedAt : new Date,
   });

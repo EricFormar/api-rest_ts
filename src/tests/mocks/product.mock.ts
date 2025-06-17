@@ -1,20 +1,19 @@
 import Product, { ProductAttributes } from "../../database/models/product";
-import { getRandomNumber } from "../../utils/getRandomNumber";
 
 export const getProductMock = async (data : Partial<ProductAttributes>) : Promise<Product> => {
 
-  const {id,name, description, price, discount, subcategoryId, sectionId, brandId, categoryId} = data;
+  const {id = 1,name, description, price, discount, subcategoryId = 1, sectionId = 1, brandId = 1, categoryId = 1} = data;
 
   const newProduct = await Product.create({
-    id : id || getRandomNumber(1,1000),
+    id,
     name : name || "any name",
     description : description || "any description",
     price : price || 100,
     discount : discount || 0,
-    subcategoryId : subcategoryId || 1,
-    sectionId : sectionId || 1,
-    brandId : brandId || 1,
-    categoryId : categoryId || 1,
+    subcategoryId,
+    sectionId,
+    brandId,
+    categoryId,
   });
 
   return newProduct;

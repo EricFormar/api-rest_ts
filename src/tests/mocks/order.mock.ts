@@ -1,16 +1,14 @@
 import Order, { OrderAttributes } from "../../database/models/order";
-import { getRandomNumber } from "../../utils/getRandomNumber";
-
 
 export const getOrderMock = async (data : Partial<OrderAttributes>): Promise<Order> => {
   
-  const {id, total, statusId, userId} = data;
+  const {id = 1, total, statusId = 1, userId = 1} = data;
 
   const newOrder = await Order.create({
-    id : id || getRandomNumber(1,100),
+    id,
     total: total || 1,
-    statusId: statusId || getRandomNumber(1,10),
-    userId: userId || getRandomNumber(1,100),
+    statusId,
+    userId,
     createdAt: new Date(),
     updatedAt: new Date(),
   });

@@ -2,11 +2,11 @@ import Image, { ImageAttributes } from "../../database/models/image";
 
 export const getImageMock = async (data : Partial<ImageAttributes>) : Promise<Image> => {
 
-  const {id, file, productId} = data
+  const {id = 1, file = "any file", productId = 1} = data
   const newImage = await Image.create({
-    id : id || 1,
-    file : file || "any file",
-    productId : productId || 1,
+    id,
+    file,
+    productId,
     createdAt : new Date,
     updatedAt : new Date,
   });
