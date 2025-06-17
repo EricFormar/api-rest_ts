@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { queryInterface, DataTypesTest } from "../setup";
+import { queryInterface, DataTypesTest } from "../../database/setup";
 import migration from "../../database/migrations/20250607141756-user";
 import migrationRol from "../../database/migrations/20250607141656-rol";
 import { QueryInterface } from "sequelize";

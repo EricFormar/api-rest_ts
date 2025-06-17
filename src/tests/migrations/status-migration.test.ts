@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { queryInterface, DataTypesTest } from "../setup";
+import { queryInterface, DataTypesTest } from "../../database/setup";
 import migration from "../../database/migrations/20250607142616-status";
 import { getStatusMock } from "../mocks/status.mock";
 import { getRandomNumber } from "../../utils/getRandomNumber";

@@ -1,6 +1,6 @@
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { queryInterface, DataTypesTest } from "../setup";
+import { queryInterface, DataTypesTest } from "../../database/setup";
 import migration from "../../database/migrations/20250607142724-order";
 import migrationUser from "../../database/migrations/20250607141756-user";
 import migrationStatus from "../../database/migrations/20250607142616-status";

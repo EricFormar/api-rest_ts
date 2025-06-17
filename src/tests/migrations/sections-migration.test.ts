@@ -1,6 +1,6 @@
 // categories-migration.test.ts
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { queryInterface, DataTypesTest } from "../setup"; // Importa la configuración de la DB de prueba
+import { queryInterface, DataTypesTest } from "../../database/setup"; // Importa la configuración de la DB de prueba
 import migration from "../../database/migrations/20250607110120-section"; // Ajusta la ruta a tu archivo de migración
 import { getSectionMock } from "../mocks/section.mock";
 import { getRandomNumber } from "../../utils/getRandomNumber";

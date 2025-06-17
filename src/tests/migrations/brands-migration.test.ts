@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { queryInterface, DataTypesTest } from "../setup";
+import { queryInterface, DataTypesTest } from "../../database/setup";
 import migration from "../../database/migrations/20250607110250-brand";
 import { getBrandMock } from "../mocks/brand.mock";
 

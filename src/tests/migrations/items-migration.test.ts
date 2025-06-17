@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { queryInterface, DataTypesTest } from "../setup";
+import { queryInterface, DataTypesTest } from "../../database/setup";
 import migration from "../../database/migrations/20250607143040-item";
 import migrationProduct from "../../database/migrations/20250607110618-product";
 import migrationOrder from "../../database/migrations/20250607142724-order";

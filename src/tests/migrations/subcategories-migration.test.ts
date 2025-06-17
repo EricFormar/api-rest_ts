@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { queryInterface, DataTypesTest } from "../setup";
+import { queryInterface, DataTypesTest } from "../../database/setup";
 import migration from "../../database/migrations/20250607110406-subcategory";
 import migrationCategoy from "../../database/migrations/20250607105742-category"; // Ajusta la ruta a tu archivo de migración
 import { getSubCategoryMock } from "../mocks/subcategory.mock";
