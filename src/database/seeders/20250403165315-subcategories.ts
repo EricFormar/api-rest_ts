@@ -13,8 +13,7 @@ export = {
     const result  = await queryInterface.sequelize.query(
       'SELECT id, name FROM Categories'
     ) as unknown as [CategoryAttributes[],[]];
-    const categories : CategoryAttributes[] = result[0];
-
+    const categories : CategoryAttributes[] = result[0];    
     const subcategories : Partial<SubCategoryAttributes>[] = [];
     
     categoriesData.forEach(category => {

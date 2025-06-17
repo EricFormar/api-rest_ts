@@ -4,7 +4,7 @@ import { QueryInterface, Sequelize } from "sequelize";
 import bcrypt from 'bcrypt';
 import { INIT_PASSWORD } from "../../env";
 
-const password = INIT_PASSWORD || '123123'
+const password = INIT_PASSWORD;
 
 /** @type {import('sequelize-cli').Migration} */
 
@@ -21,7 +21,7 @@ export = {
           password: bcrypt.hashSync(password, 10),
           token: null,
           validated: true,
-          lock: false,
+          locked: false,
           rolId: 1,
           createdAt : new Date,
           updatedAt : new Date
@@ -33,7 +33,7 @@ export = {
           password: bcrypt.hashSync(password, 10),
           token: null,
           validated: true,
-          lock: false,
+          locked: false,
           rolId: 2,
           createdAt : new Date,
           updatedAt : new Date

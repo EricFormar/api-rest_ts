@@ -1,7 +1,6 @@
 'use strict';
 
 import { QueryInterface, Sequelize } from "sequelize";
-import { BrandAttributes } from "../models/brand";
 import brandsJSON from '../../data/brands.json';
 
 /** @type {import('sequelize-cli').Migration} */

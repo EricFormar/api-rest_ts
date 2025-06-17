@@ -34,9 +34,9 @@ export = {
         discount: product.discount || 0,
         description: product.description,
         sectionId: product.section == "visited" ? 1 : 2,
-        categoryId: category? category.id : null,
-        subcategoryId: subcategory ? subcategory.id : null,
-        brandId: brand ? brand.id : null,
+        categoryId: category?.id,
+        subcategoryId: subcategory?.id,
+        brandId: brand?.id,
         createdAt: new Date(),
         updatedAt: new Date()
       };
