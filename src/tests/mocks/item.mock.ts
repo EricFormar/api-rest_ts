@@ -1,15 +1,14 @@
 import Item, { ItemAttributes } from "../../database/models/item";
-import { getRandomNumber } from "../../utils/getRandomNumber";
 
 export const getItemMock = async (data : Partial<ItemAttributes>): Promise<Item> => {
 
-  const {id, quantity, productId, orderId} = data;
+  const {id = 1, quantity = 1, productId = 1, orderId = 1} = data;
 
   const newItem = await Item.create({
-    id : id || getRandomNumber(1,100),
-    quantity: quantity || 1,
-    productId: productId || getRandomNumber(1,1000),
-    orderId: orderId || getRandomNumber(1,100),
+    id,
+    quantity,
+    productId,
+    orderId,
     createdAt: new Date(),
     updatedAt: new Date(),
   });
