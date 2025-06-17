@@ -1,5 +1,5 @@
 import { QueryInterface } from "sequelize";
-import { DataTypesTest, queryInterface } from "../setup";
+import { DataTypesTest, queryInterface } from "../../database/setup";
 import migration from "../../database/migrations/20250607142315-address";
 import Address from "../../database/models/address";
 import { AddressAttributes } from "../../database/models/address";

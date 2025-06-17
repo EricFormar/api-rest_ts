@@ -2,9 +2,7 @@ import SubCategory, { SubCategoryAttributes } from "../../database/models/subcat
 
 export const getSubCategoryMock = async (data : Partial<SubCategoryAttributes>) : Promise<SubCategory> => {
 
-  const {id = 1, name, image, categoryId = 1} = data;
-  console.log({categoryId});
-  
+  const {id = 1, name, image, categoryId = 1} = data; 
 
   const newSubCategory = await SubCategory.create({
     id,
