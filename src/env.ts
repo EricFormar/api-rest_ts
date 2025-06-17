@@ -23,7 +23,7 @@ export const {
     DB_DIALECT,
     DB_STORAGE,
     DB_LOGGING,
-    INIT_PASSWORD
+    INIT_PASSWORD = '123456',
 } = process.env;
 
 export default {
