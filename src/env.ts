@@ -4,10 +4,6 @@ import path from 'path';
 type TypeMode = 'development' | 'production' | 'test';
 const mode : TypeMode = process.env.NODE_ENV as TypeMode || 'development';
 
-if(!['development', 'production', 'test'].includes(mode)) {
-    throw new Error('Invalid mode');
-}
-
 const envFile = `.env.${mode}`;
 config({ path: path.join(__dirname,'environments', envFile) });
 
