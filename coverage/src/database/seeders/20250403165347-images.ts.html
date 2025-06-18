@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -96,60 +96,60 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
 import { QueryInterface, Sequelize } from "sequelize";
 import { ImageAttributes } from "../models/image";
-<span class="cstat-no" title="statement not covered" >import productsData from "../../data/products"</span>
+import productsData from "../../data/products"
 &nbsp;
 /** @type {import('sequelize-cli').Migration} */
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export = {</span>
-<span class="cstat-no" title="statement not covered" >  async up (queryInterface : QueryInterface, Sequelize: Sequelize) {</span>
+export = {
+  async up (queryInterface : QueryInterface, Sequelize: Sequelize) {
   
-<span class="cstat-no" title="statement not covered" >    const images : Omit&lt;ImageAttributes, 'id'&gt;[] = [];</span>
+    const images : Omit&lt;ImageAttributes, 'id'&gt;[] = [];
     
-<span class="cstat-no" title="statement not covered" >    productsData.forEach(product =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >          images.push({</span>
-<span class="cstat-no" title="statement not covered" >            file: product.image,</span>
-<span class="cstat-no" title="statement not covered" >            productId: product.id,</span>
-<span class="cstat-no" title="statement not covered" >            createdAt: new Date(),</span>
-<span class="cstat-no" title="statement not covered" >            updatedAt: new Date()</span>
-<span class="cstat-no" title="statement not covered" >        });</span>
-<span class="cstat-no" title="statement not covered" >    });</span>
+    productsData.forEach(product =&gt; {
+          images.push({
+            file: product.image,
+            productId: product.id,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        });
+    });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    await queryInterface.bulkInsert('Images', images, {});</span>
-<span class="cstat-no" title="statement not covered" >  },</span>
+    await queryInterface.bulkInsert('Images', images, {});
+  },
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  async down (queryInterface: QueryInterface, Sequelize: Sequelize) {</span>
-<span class="cstat-no" title="statement not covered" >    await queryInterface.bulkDelete('Images', [], {});</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+  async down (queryInterface: QueryInterface, Sequelize: Sequelize) {
+    await queryInterface.bulkDelete('Images', [], {});
+  }
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -157,7 +157,7 @@ import { ImageAttributes } from "../models/image";
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-06-17T11:03:16.692Z
+                at 2025-06-17T14:28:32.359Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

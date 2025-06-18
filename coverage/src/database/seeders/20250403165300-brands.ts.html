@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -86,55 +86,52 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
 import { QueryInterface, Sequelize } from "sequelize";
-import { BrandAttributes } from "../models/brand";
-<span class="cstat-no" title="statement not covered" >import brandsJSON from '../../data/brands.json';</span>
+import brandsJSON from '../../data/brands.json';
 &nbsp;
 /** @type {import('sequelize-cli').Migration} */
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export = {</span>
-<span class="cstat-no" title="statement not covered" >  async up (queryInterface : QueryInterface, Sequelize : Sequelize) {</span>
-<span class="cstat-no" title="statement not covered" >    const brands = brandsJSON.map((brand) =&gt; ({</span>
-<span class="cstat-no" title="statement not covered" >      name: brand.name,</span>
-<span class="cstat-no" title="statement not covered" >      image: null,</span>
-<span class="cstat-no" title="statement not covered" >      createdAt: new Date(),</span>
-<span class="cstat-no" title="statement not covered" >      updatedAt: new Date()</span>
-<span class="cstat-no" title="statement not covered" >    }));</span>
+export = {
+  async up (queryInterface : QueryInterface, Sequelize : Sequelize) {
+    const brands = brandsJSON.map((brand) =&gt; ({
+      name: brand.name,
+      image: null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }));
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    await queryInterface.bulkInsert('Brands', brands, {});</span>
-<span class="cstat-no" title="statement not covered" >  },</span>
+    await queryInterface.bulkInsert('Brands', brands, {});
+  },
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  async down (queryInterface : QueryInterface, Sequelize : Sequelize) {</span>
-<span class="cstat-no" title="statement not covered" >    await queryInterface.bulkDelete('Brands', [], {});</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+  async down (queryInterface : QueryInterface, Sequelize : Sequelize) {
+    await queryInterface.bulkDelete('Brands', [], {});
+  }
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -142,7 +139,7 @@ import { BrandAttributes } from "../models/brand";
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-06-17T11:03:16.692Z
+                at 2025-06-17T14:28:32.359Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
