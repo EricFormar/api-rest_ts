@@ -20,7 +20,7 @@ describe("Seed User", () => {
         await migrationRol.down(queryInterface, DataTypesTest);
     })
 
-    it("should return a brand", async () => {
+    it("should return a user", async () => {
         const users = await User.findAll();
         expect(users).toBeDefined();
         expect(users.length).toBeGreaterThan(0);

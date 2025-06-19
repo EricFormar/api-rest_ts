@@ -14,7 +14,7 @@ describe("Seed Status", () => {
     afterEach(async () => {
         await migration.down(queryInterface, DataTypesTest);
     })
-    it("should return a brand", async () => {
+    it("should return a status", async () => {
         
         const statuses = await Status.findAll();
         expect(statuses).toBeDefined();
