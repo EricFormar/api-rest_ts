@@ -1,98 +1,60 @@
-import Category, { CategoryAttributes } from "../database/models/category";
 import { BadRequestError, NotFoundError } from "../errors/HttpError";
-import { CategoryPayload } from "../interfaces/Category.interface";
+import { ICategory } from "../interfaces/ICategory";
+import { CategoryTestingRepository } from "../tests/repositories/CategoryTestingrRepository";
 import { getRandomNumber } from "../utils/getRandomNumber";
 
 export class CategoryService {
+  constructor(private categoryRepository: CategoryTestingRepository) {}
 
-   // Get all categories
-   async getAllCategories() {
-      const categories = await Category.findAll();
-      return categories;
-   }
-   // Get category by id
-   async getCategoryById(id: number) {
+  // Get all categories
+  async getAll() {
+    return this.categoryRepository.findAll();
+  }
 
-      if(!id) {
-         throw new BadRequestError("Category id is required");
-      }
+  // Get category by id
+  async getById(id: number) {
+    if (typeof id !== "number") throw new BadRequestError();
+    const category = await this.categoryRepository.findById(id);
+    if (!category) throw new NotFoundError();
+    return category;
+  }
 
-      if(typeof id !== "number") {
-         throw new BadRequestError("Category id must be a number");
-      }
+  // Create category
+  async create(
+    category: Omit<ICategory, "id" | "createdAt" | "updatedAt">
+  ) {
+    if (
+      !category.name ||
+      !category.image ||
+      category.name === "" ||
+      category.image === ""
+    ) {
+      throw new BadRequestError("Bad Request");
+    }
 
-      const category = await Category.findByPk(id);
-      if(!category) {
-         throw new NotFoundError("Category not found");
-      }
-      return category;
-   }
+    return await this.categoryRepository.create(category);
+  }
+  // Update category
+  async update(
+    category: Omit<Partial<ICategory>, "createdAt" | "updatedAt">
+  ) {
+   if(!category) throw new BadRequestError();
 
-   // Find category by query string
-   async findCategory(queryString: Omit<Partial<CategoryAttributes>, "id" | "createdAt" | "updatedAt" | "deletedAt">) {
-
-      if(Object.keys(queryString).length === 0) {
-         throw new BadRequestError("Query string is empty");
-      };
-
-      const query = {
-         where : queryString
-      };
-      const category = await Category.findOne(query);
-
-      if(!category) {
-         throw new NotFoundError("Category not found");
-      }
-      return category;
-   }
-   // Create category
-   async createCategory(payload: CategoryPayload) {
-      
-      if(!payload.name || !payload.image) {
-         throw new BadRequestError("Category name and image are required");
-      }
-
-      const categoryData = {
-            ...payload,
-            id : getRandomNumber(1,100),
-            createdAt : new Date,
-            updatedAt : new Date,
-         }
-         const category = await Category.create(categoryData);
-         return category;
-   }
-   // Update category
-   async updateCategory(id: number, payload: Partial<CategoryPayload>) {
-      if(!id) {
-         throw new BadRequestError("Category id is required");
-      }
-      
-
-      if(Object.keys(payload).length === 0) {
-         throw new BadRequestError("Category payload is empty");
-      }
-
-      const category = await Category.findByPk(id);
-      if(!category) {
-         throw new NotFoundError("Category not found");
-      }
-
-      await category.update(payload);
-      return category;
-   };
-
-   // Delete category
-   async deleteCategory(id: number) : Promise<void> {
-      if(!id) {
-         throw new BadRequestError("Category id is required");
-      }
-
-      const category = await Category.findByPk(id);
-      if(!category) {
-         throw new NotFoundError("Category not found");
-      }
-
-     await category.destroy();
-
-   }
+    const categoryToUpdate = await this.categoryRepository.findById(
+      category.id as number
+    );
+    if (!categoryToUpdate) {
+      throw new NotFoundError("category not found");
+    }
+    return this.categoryRepository.update(category);
+  }
+  // Delete category
+  async delete(id: number) {
+   if(typeof id != "number") throw new BadRequestError();
+    const category = await this.categoryRepository.findById(id);
+    if (!category) {
+      throw new NotFoundError("category not found");
+    }
+    return this.categoryRepository.delete(id);
+  }
 }
