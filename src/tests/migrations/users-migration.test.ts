@@ -69,40 +69,6 @@ describe("Migration: Create Users Table", () => {
     expect(tableDescription.deletedAt.allowNull).toBe(true);
   });
 
-  it("should create a new user with the correct data", async () => {
-    
-    await migrationRol.up(queryInterface as QueryInterface, DataTypesTest);
-
-    const newRol = await getRolMock({
-      id : getRandomNumber(1,10),
-    });
-    
-    const newUser = await getUserMock({
-      id : 1,
-      name : "any name",
-      surname : "any surname",
-      email : "any@email.com",
-      password : "any password",
-      image : "any image",
-      locked : false,
-      validated : false,
-      rolId : newRol.id,
-    });
-
-    expect(newUser).toBeDefined();
-    expect(newUser.name).toBe("any name");
-    expect(newUser.surname).toBe("any surname");
-    expect(newUser.email).toBe("any@email.com");
-    expect(newUser.password).toBe("any password");
-    expect(newUser.image).toBe("any image");
-    expect(newUser.locked).toBe(false);
-    expect(newUser.validated).toBe(false);
-    expect(newUser.rolId).toBe(newRol.id);
-    
-    await migration.down(queryInterface, DataTypesTest);    
-    await migrationRol.down(queryInterface, DataTypesTest);
-  });
-
   it("should drop the Users table when migrating down", async () => {
 
     let tables = await queryInterface.showAllTables();

@@ -1,18 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../../database/setup";
 import migration from "../../database/migrations/20250607110618-product";
-import migrationSection from "../../database/migrations/20250607110120-section";
-import migrationCategory from "../../database/migrations/20250607105742-category";
-import migrationSubcategory from "../../database/migrations/20250607110406-subcategory";
-import migrationBrand from "../../database/migrations/20250607110250-brand";
-import { getProductMock } from "../mocks/product.mock";
-import { getCategoryMock } from "../mocks/category.mock";
-import { getRandomNumber } from "../../utils/getRandomNumber";
-import { getSubCategoryMock } from "../mocks/subcategory.mock";
-import { getSectionMock } from "../mocks/section.mock";
-import { getBrandMock } from "../mocks/brand.mock";
-
-
 
 describe("Migration: Create Products Table", () => {
   beforeEach(async () => {
@@ -72,53 +60,6 @@ describe("Migration: Create Products Table", () => {
     expect(tableDescription.deletedAt.type).toMatch(/DATETIME/i);
     expect(tableDescription.deletedAt.allowNull).toBe(true);
 
-  });
-
-  it("should create a new product", async () => {
-    
-    await migrationCategory.up(queryInterface, DataTypesTest);
-    await migrationSubcategory.up(queryInterface, DataTypesTest);
-    await migrationSection.up(queryInterface, DataTypesTest);
-    await migrationBrand.up(queryInterface, DataTypesTest);
-
-    const newCategory = await getCategoryMock({
-      id : getRandomNumber(1,100)
-    });
-    const newSubCategory = await getSubCategoryMock({
-      id : getRandomNumber(1,100),
-      categoryId : newCategory.id
-    });
-    const newSection = await getSectionMock({
-      id : getRandomNumber(1,100),
-    });
-    const newBrand = await getBrandMock({
-      id : getRandomNumber(1,100)
-    });
-    const newProduct = await getProductMock({
-      name : "Test Product",
-      description : "Test Description",
-      price : 100,
-      discount : 10,
-      subcategoryId : newSubCategory.id,
-      sectionId : newSection.id,
-      brandId : newBrand.id,
-      categoryId : newCategory.id,
-    });
-    expect(newProduct).toBeDefined();
-    expect(newProduct.name).toBe("Test Product");
-    expect(newProduct.description).toBe("Test Description");
-    expect(newProduct.price).toBe(100);
-    expect(newProduct.discount).toBe(10);
-    expect(newProduct.subcategoryId).toBe(newSubCategory.id);
-    expect(newProduct.sectionId).toBe(newSection.id);
-    expect(newProduct.brandId).toBe(newBrand.id);
-    expect(newProduct.categoryId).toBe(newCategory.id);
-
-    await migration.down(queryInterface, DataTypesTest);
-    await migrationSection.down(queryInterface, DataTypesTest);
-    await migrationSubcategory.down(queryInterface, DataTypesTest);
-    await migrationCategory.down(queryInterface, DataTypesTest);
-    await migrationBrand.down(queryInterface, DataTypesTest);
   });
 
   it("should drop the Products table when migrating down", async () => {

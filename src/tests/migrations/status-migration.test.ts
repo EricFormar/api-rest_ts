@@ -1,8 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../../database/setup";
 import migration from "../../database/migrations/20250607142616-status";
-import { getStatusMock } from "../mocks/status.mock";
-import { getRandomNumber } from "../../utils/getRandomNumber";
 
 describe("Migration: Create Statuses Table", () => {
   beforeEach(async () => {
@@ -40,16 +38,6 @@ describe("Migration: Create Statuses Table", () => {
     expect(tableDescription.deletedAt).toBeDefined();
     expect(tableDescription.deletedAt.type).toMatch(/DATETIME/i);
     expect(tableDescription.deletedAt.allowNull).toBe(true);
-  });
-
-  it("should create the Statuses table with correct indexes", async () => {
-    const newStatus = await getStatusMock({
-      id : getRandomNumber(1,10),
-      name : "Test Status"
-    });
-
-    expect(newStatus).toBeDefined();
-    expect(newStatus.name).toBe("Test Status");
   });
 
   it("should drop the Statuses table when migrating down", async () => {

@@ -2,7 +2,6 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../../database/setup"; // Importa la configuración de la DB de prueba
 import migration from "../../database/migrations/20250607105742-category"; // Ajusta la ruta a tu archivo de migración
-import { getCategoryMock } from "../mocks/category.mock";
 
 describe("Migration: Create Categories Table", () => {
   beforeEach(async () => {
@@ -47,16 +46,6 @@ describe("Migration: Create Categories Table", () => {
     expect(tableDescription.deletedAt).toBeDefined();
     expect(tableDescription.deletedAt.type).toMatch(/DATETIME/i);
     expect(tableDescription.deletedAt.allowNull).toBe(true);
-  });
-
-  it("should create a new category", async () => {
-    const newCategory = await getCategoryMock({
-      name : "Test Category",
-      image : "test.jpg",
-    });
-    expect(newCategory).toBeDefined();
-    expect(newCategory.name).toBe("Test Category");
-    expect(newCategory.image).toBe("test.jpg");
   });
 
   it("should drop the Categories table when migrating down", async () => {

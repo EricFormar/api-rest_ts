@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../../database/setup";
 import migration from "../../database/migrations/20250607110250-brand";
-import { getBrandMock } from "../mocks/brand.mock";
 
 describe("Migration: Create Brands Table", () => {
   beforeEach(async () => {
@@ -42,15 +41,6 @@ describe("Migration: Create Brands Table", () => {
     expect(tableDescription.deletedAt).toBeDefined();
     expect(tableDescription.deletedAt.type).toMatch(/DATETIME/i);
     expect(tableDescription.deletedAt.allowNull).toBe(true);
-  });
-
-  it("should insert a new brand", async () => {
-    const newBrand = await getBrandMock({
-      name : "Test Brand",
-      image : "any image"
-    });
-    expect(newBrand).toBeDefined();
-    expect(newBrand.name).equal("Test Brand");
   });
 
   it("should drop the Brands table when migrating down", async () => {

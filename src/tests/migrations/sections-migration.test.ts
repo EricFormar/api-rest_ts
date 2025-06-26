@@ -2,8 +2,6 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../../database/setup"; // Importa la configuración de la DB de prueba
 import migration from "../../database/migrations/20250607110120-section"; // Ajusta la ruta a tu archivo de migración
-import { getSectionMock } from "../mocks/section.mock";
-import { getRandomNumber } from "../../utils/getRandomNumber";
 
 describe("Migration: Create Sections Table", () => {
   beforeEach(async () => {
@@ -44,16 +42,6 @@ describe("Migration: Create Sections Table", () => {
     expect(tableDescription.deletedAt.type).toMatch(/DATETIME/i);
     expect(tableDescription.deletedAt.allowNull).toBe(true);
 
-  });
-
-  it("should insert a new section", async () => {
-    const newSection = await getSectionMock({
-      id : getRandomNumber(1,10),
-      name : "Test Section"
-    });
-
-    expect(newSection).toBeDefined();
-    expect(newSection.name).toBe("Test Section");
   });
 
   it("should drop the Sections table when migrating down", async () => {

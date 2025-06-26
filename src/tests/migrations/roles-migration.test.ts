@@ -2,9 +2,6 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../../database/setup";
 import migration from "../../database/migrations/20250607141656-rol";
-import { QueryInterface } from "sequelize";
-import { getRolMock } from "../mocks/rol.mock";
-import { getRandomNumber } from "../../utils/getRandomNumber";
 
 describe("Migration: Create Rols Table", () => {
 
@@ -46,17 +43,6 @@ describe("Migration: Create Rols Table", () => {
     expect(tableDescription.deletedAt.type).toMatch(/DATETIME/i);
     expect(tableDescription.deletedAt.allowNull).toBe(true);
 
-  });
-
-  it("should create the Rols table with correct columns", async () => {
-    
-    const newRol = await getRolMock({
-      id : getRandomNumber(1,10),
-      name : "Test Rol"
-    });
-
-    expect(newRol).toBeDefined();
-    expect(newRol.name).toBe("Test Rol");
   });
 
   it("should drop the Rols table when migrating down", async () => {

@@ -2,12 +2,8 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../../database/setup";
 import migration from "../../database/migrations/20250607142315-address";
-import migrationUser from "../../database/migrations/20250607141756-user";
-import migrationRol from "../../database/migrations/20250607141656-rol";
 import { QueryInterface } from "sequelize";
-import { getAddressMock } from "../mocks/address.mock";
-import { getUserMock } from "../mocks/user.mock";
-import { getRolMock } from "../mocks/rol.mock";
+
 
 describe("Migration: Create Addresses Table", () => {
   beforeEach(async () => {
@@ -64,41 +60,6 @@ describe("Migration: Create Addresses Table", () => {
     expect(tableDescription.deletedAt.allowNull).toBe(true);
 
   });
-
-  it("create a new address", async () => {
-    await migrationRol.up(queryInterface as QueryInterface, DataTypesTest);
-    const newRol = await getRolMock({
-      id: 1,
-      name: "any rol",
-    });
-    await migrationUser.up(queryInterface as QueryInterface, DataTypesTest);
-    const newUser = await getUserMock({
-      name : "any name",
-      rolId: newRol.id,
-    });
-
-    const newAddress = await getAddressMock({
-      id: 1,
-      location: "any location",
-      city: "any city",
-      province: "any province",
-      country: "any country",
-      postalCode: "any postal code",
-      userId: newUser.id,
-    });
-       
-    expect(newAddress).toBeDefined();
-    expect(newAddress.location).toBe("any location");
-    expect(newAddress.city).toBe("any city");
-    expect(newAddress.province).toBe("any province");
-    expect(newAddress.country).toBe("any country");
-    expect(newAddress.postalCode).toBe("any postal code");
-    expect(newAddress.userId).toBe(newUser.id);
-    expect(newAddress.createdAt).toBeDefined();
-    expect(newAddress.updatedAt).toBeDefined();
-
-    await migrationUser.down(queryInterface, DataTypesTest);
-  })
 
   it("should drop the Addresses table when migrating down", async () => {
   

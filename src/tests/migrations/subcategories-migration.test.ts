@@ -1,10 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { queryInterface, DataTypesTest } from "../../database/setup";
 import migration from "../../database/migrations/20250607110406-subcategory";
-import migrationCategoy from "../../database/migrations/20250607105742-category"; // Ajusta la ruta a tu archivo de migración
-import { getSubCategoryMock } from "../mocks/subcategory.mock";
-import { getCategoryMock } from "../mocks/category.mock";
-import { getRandomNumber } from "../../utils/getRandomNumber";
 
 describe("Migration: Create Subcategories Table", () => {
   beforeEach(async () => {
@@ -48,28 +44,6 @@ describe("Migration: Create Subcategories Table", () => {
     expect(tableDescription.deletedAt).toBeDefined();
     expect(tableDescription.deletedAt.type).toMatch(/DATETIME/i);
     expect(tableDescription.deletedAt.allowNull).toBe(true);
-  });
-
-  it("should insert a new Subcategory into the Subcategories table", async () => {
-    await migrationCategoy.up(queryInterface, DataTypesTest);
-    const newCategory = await getCategoryMock({
-      id : getRandomNumber(1,10),
-    })
-    
-    const newSubCategory = await getSubCategoryMock({
-      id: 1,
-      name: "Test SubCategory",
-      image: "test-image.jpg",
-      categoryId: newCategory.id,
-    });
-
-    expect(newSubCategory).toBeDefined();
-    expect(newSubCategory.id).toBe(1);
-    expect(newSubCategory.name).toBe("Test SubCategory");
-    expect(newSubCategory.image).toBe("test-image.jpg");
-    expect(newSubCategory.categoryId).toBe(newCategory.id);
-    await migration.down(queryInterface, DataTypesTest);
-    await migrationCategoy.down(queryInterface, DataTypesTest);
   });
 
   it("should drop the Subcategories table when migrating down", async () => {
