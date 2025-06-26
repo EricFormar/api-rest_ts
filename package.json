@@ -9,7 +9,8 @@
     "db:create": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
     "db:reset": "sequelize db:drop && npm run db:create",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:watch" : "vitest --watch"
   },
   "keywords": [],
   "author": "",
