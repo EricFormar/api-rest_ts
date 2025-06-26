@@ -7,7 +7,6 @@ import { CategoryTestingRepository } from "../repositories/CategoryTestingrRepos
 const categories = [
   getCategoryMock({
     id: 1,
-    name: "any category",
   }),
   getCategoryMock({
     id: 2,

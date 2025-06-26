@@ -11,8 +11,17 @@ let mockProductRepository: ProductTestingRespository;
 beforeEach(async () => {
   // Resetear los mocks antes de cada test para que no haya interferencias entre ellos.
   mockProductRepository = new ProductTestingRespository([
-    getProductMock({ id: 1, name: "any product", price: 100 }),
+    getProductMock({}),
     getProductMock({ id: 2, name: "other product", price: 200 }),
+    getProductMock({ 
+      id: 3, 
+      name: "any product", 
+      description: "any description",
+      categoryId : 1,
+      sectionId : 1,
+      brandId : 1,
+      subcategoryId : 1
+    }),
   ]);
   productService = new ProductService(mockProductRepository);
 });
@@ -24,8 +33,8 @@ describe("ProductService.getAllProducts", () => {
 
     expect(result).toBeDefined();
     expect(result.length).toBeGreaterThan(0);
-    expect(result[0].name).toBe("any product");
     expect(result[1].name).toBe("other product");
+    expect(result[2].name).toBe("any product");
   });
 
   it("should return an empty array if no products are found", async () => {
@@ -39,14 +48,14 @@ describe("ProductService.getAllProducts", () => {
 // --- Test Suite para getProductById ---
 describe("ProductService.getProductById", () => {
   it("should return a product by id", async () => {
-    const result = await productService.getProductById(1);
+    const result = await productService.getProductById(3);
 
     expect(result).toBeDefined();
     expect(result.name).toBe("any product");
   });
 
   it("should return null if product not found", async () => {
-    await expect(productService.getProductById(3)).rejects.toThrow(
+    await expect(productService.getProductById(4)).rejects.toThrow(
       NotFoundError
     );
   });

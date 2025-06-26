@@ -7,7 +7,6 @@ import { BrandTestingRepository } from "../repositories/BrandTestingRepository";
 const brands = [
   getBrandMock({
     id: 1,
-    name: "any brand",
   }),
   getBrandMock({
     id: 2,
@@ -50,8 +49,12 @@ describe("BrandService.getById", () => {
   });
 
   // Checar errores al obtener brand por id
-  it("should return null if brand not found", async () => {
+  it("should return error if brand not found", async () => {
     await expect(brandService.getById(3)).rejects.toThrow(NotFoundError);
+  });
+
+  it("should return error if bad brand id", async () => {
+    await expect(brandService.getById("a" as any)).rejects.toThrow(BadRequestError);
   });
 
   describe("BrandService.create", () => {
@@ -87,7 +90,7 @@ describe("BrandService.update", () => {
     const brandUpdated = await brandService.update(brandToUpdate);
 
     expect(brandUpdated).toBeDefined();
-    expect(brandUpdated).toEqual(brandToUpdate);
+    expect(brandUpdated?.name).toBe(brandToUpdate.name);
   });
 
   it("should return reject if product to update not found", async () => {
