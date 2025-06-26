@@ -10,8 +10,9 @@ import User from "../../database/models/user";
 describe("Seed User", () => {
     beforeEach(async () => {
         await migrationRol.up(queryInterface, DataTypesTest);
-        await seedRol.up(queryInterface, sequelizeConnection);
         await migration.up(queryInterface, DataTypesTest);
+
+        await seedRol.up(queryInterface, sequelizeConnection);
         await seed.up(queryInterface, sequelizeConnection);
     });
 
