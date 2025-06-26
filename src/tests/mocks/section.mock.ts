@@ -1,22 +1,13 @@
-import { Model, QueryInterface } from "sequelize";
-import Section, { SectionAttributes } from "../../database/models/section";
+import { ISection } from "../../interfaces/ISection";
 
-export interface ISection extends Model {
-  id: number;
-  name: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date | null;
-}
-
-export const getSectionMock = async (data : Partial<SectionAttributes>) : Promise<Section> => {
+export const getSectionMock =  (data : Partial<ISection>) : ISection => {
 
   const {id = 1, name} = data;
-  const newSection = await Section.create({
+  const newSection = {
     id,
     name : name || "any name",
     createdAt : new Date,
     updatedAt : new Date,
-  });
+  };
   return newSection;
 };

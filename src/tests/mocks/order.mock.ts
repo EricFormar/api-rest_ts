@@ -1,16 +1,16 @@
-import Order, { OrderAttributes } from "../../database/models/order";
+import { IOrder } from "../../interfaces/IOrder";
 
-export const getOrderMock = async (data : Partial<OrderAttributes>): Promise<Order> => {
+export const getOrderMock = (data : Partial<IOrder>): IOrder => {
   
   const {id = 1, total, statusId = 1, userId = 1} = data;
 
-  const newOrder = await Order.create({
+  const newOrder = {
     id,
     total: total || 1,
     statusId,
     userId,
     createdAt: new Date(),
     updatedAt: new Date(),
-  });
+  };
   return newOrder;
 };

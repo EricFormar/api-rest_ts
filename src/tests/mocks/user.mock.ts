@@ -1,9 +1,9 @@
-import User, { UserAttributes } from "../../database/models/user";
+import { IUser } from "../../interfaces/IUser";
 
-export const getUserMock = async (data : Partial<UserAttributes>) : Promise<User> => {
+export const getUserMock = (data : Partial<IUser>) : IUser => {
 
   const {id, name, surname, email, password, image, locked, validated, rolId = 1} = data;
-  const newUser = await User.create({
+  const newUser = {
     id: id || 1,
     name: name || "any name",
     surname: surname || "any surnname",
@@ -15,7 +15,7 @@ export const getUserMock = async (data : Partial<UserAttributes>) : Promise<User
     rolId,
     createdAt : new Date,
     updatedAt : new Date,
-  });
+  };
 
   return newUser;
 };

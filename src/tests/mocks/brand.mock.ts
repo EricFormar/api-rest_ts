@@ -1,15 +1,15 @@
-import Brand, { BrandAttributes }  from "../../database/models/brand";
+import { IBrand } from "../../interfaces/IBrand";
 
-export const getBrandMock = async (data : Partial<BrandAttributes>) => {
+export const getBrandMock =  (data : Partial<IBrand>) => {
   
   const {id = 1, name, image} = data;
-      const newBrand = await Brand.create({
+      const newBrand = {
         id,
         name : name || "any name",
         image : image || "any image",
         createdAt : new Date,
         updatedAt : new Date
-      });
+      };
 
       return newBrand;                        
     }

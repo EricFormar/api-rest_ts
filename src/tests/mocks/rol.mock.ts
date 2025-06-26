@@ -1,14 +1,14 @@
-import Rol, { RolAttributes } from "../../database/models/rol";
+import { IRol } from "../../interfaces/IRol";
 
-export const getRolMock = async (data : Partial<RolAttributes>) : Promise<Rol> => {
+export const getRolMock =  (data : Partial<IRol>) : IRol => {
 
   const {id = 1, name} = data;
-  const newRol = await Rol.create({
+  const newRol = {
     id,
     name: name || "any rol",
     createdAt : new Date,
     updatedAt : new Date,
-  });
+  };
 
   return newRol;
 };

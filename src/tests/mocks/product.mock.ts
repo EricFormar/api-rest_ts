@@ -1,20 +1,22 @@
-import Product, { ProductAttributes } from "../../database/models/product";
+import { IProduct } from "../../interfaces/IProduct";
 
-export const getProductMock = async (data : Partial<ProductAttributes>) : Promise<Product> => {
+export const getProductMock = (data : Partial<IProduct>) : IProduct => {
 
-  const {id = 1,name, description, price, discount, subcategoryId = 1, sectionId = 1, brandId = 1, categoryId = 1} = data;
+  const {id, name, description, price, discount, subcategoryId, sectionId, brandId, categoryId} = data;
 
-  const newProduct = await Product.create({
-    id,
+  const product : IProduct = {
+    id: id || 1,
     name : name || "any name",
     description : description || "any description",
     price : price || 100,
     discount : discount || 0,
-    subcategoryId,
-    sectionId,
-    brandId,
-    categoryId,
-  });
+    subcategoryId: subcategoryId || 1,
+    sectionId: sectionId || 1,
+    brandId: brandId || 1,
+    categoryId: categoryId || 1,
+    createdAt : new Date,
+    updatedAt : new Date,
+  };
 
-  return newProduct;
+  return product;
 };

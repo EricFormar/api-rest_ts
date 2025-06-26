@@ -1,16 +1,15 @@
-import Item, { ItemAttributes } from "../../database/models/item";
+import { IItem } from "../../interfaces/IItem";
 
-export const getItemMock = async (data : Partial<ItemAttributes>): Promise<Item> => {
+export const getItemMock = (data: Partial<IItem>): IItem => {
+  const { id = 1, quantity = 1, productId = 1, orderId = 1 } = data;
 
-  const {id = 1, quantity = 1, productId = 1, orderId = 1} = data;
-
-  const newItem = await Item.create({
+  const newItem = {
     id,
     quantity,
     productId,
     orderId,
     createdAt: new Date(),
     updatedAt: new Date(),
-  });
+  };
   return newItem;
 };

@@ -1,14 +1,16 @@
-import Image, { ImageAttributes } from "../../database/models/image";
+import { IImage } from "../../interfaces/IImage";
 
-export const getImageMock = async (data : Partial<ImageAttributes>) : Promise<Image> => {
-
+export const getImageMock = (data : Partial<IImage>) : IImage => {
+  
   const {id = 1, file = "any file", productId = 1} = data
-  const newImage = await Image.create({
+  const image : IImage = {
     id,
     file,
     productId,
     createdAt : new Date,
     updatedAt : new Date,
-  });
-  return newImage;
-};
+  };
+
+  return image;
+
+}

@@ -1,12 +1,7 @@
-import { QueryInterface } from "sequelize";
-import { DataTypesTest, queryInterface } from "../../database/setup";
-import migration from "../../database/migrations/20250607142315-address";
-import Address from "../../database/models/address";
-import { AddressAttributes } from "../../database/models/address";
+import { IAddress } from "../../interfaces/IAddress";
 
-export const getAddressMock = async (data : Partial<AddressAttributes>
-): Promise<Address> => {
-  await migration.up(queryInterface as QueryInterface, DataTypesTest);
+export const getAddressMock =  (data : Partial<IAddress>
+): IAddress => {
 
   const {
     id = 1, 
@@ -17,7 +12,7 @@ export const getAddressMock = async (data : Partial<AddressAttributes>
     postalCode  = "any postal code", 
     userId = 1} = data ;
 
-  const newAddress = await Address.create({
+  const newAddress = {
     id,
     location,
     city,
@@ -27,6 +22,6 @@ export const getAddressMock = async (data : Partial<AddressAttributes>
     userId,
     createdAt : new Date,
     updatedAt : new Date,
-  });
+  };
   return newAddress;
 };
