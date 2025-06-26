@@ -40,16 +40,7 @@ export class CategoryTestingRepository implements ICategoryRepository {
 
   async delete(id: number): Promise<boolean> {
     const index = this.categories.findIndex((product) => product.id === id);
-    if (index !== -1) {
       this.categories.splice(index, 1);
       return true;
-    }
-    return false;
-  }
-
-  async search(data: Partial<ICategory>): Promise<ICategory[]> {
-    let categoriesFiltered = [...this.categories];
-
-    return categoriesFiltered;
   }
 }

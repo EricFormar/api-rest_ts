@@ -40,16 +40,7 @@ export class BrandTestingRepository implements IBrandRespository {
 
   async delete(id: number): Promise<boolean> {
     const index = this.brands.findIndex((product) => product.id === id);
-    if (index !== -1) {
-      this.brands.splice(index, 1);
-      return true;
-    }
-    return false;
-  }
-
-  async search(data: Partial<IBrand>): Promise<IBrand[]> {
-    let brandsFiltered = [...this.brands];
-
-    return brandsFiltered;
+    this.brands.splice(index, 1);
+    return true;
   }
 }
