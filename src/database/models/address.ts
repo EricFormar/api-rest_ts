@@ -1,23 +1,8 @@
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
-import User from './user';
+import { IAddress } from '../../interfaces/IAddress';
 
-export interface AddressAttributes{
-
-  id: number;
-  location: string;
-  city: string;
-  province: string;
-  postalCode: string;
-  country: string;
-  userId: number;
-
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
-}
-
-class Address extends Model<AddressAttributes> implements AddressAttributes {
+class Address extends Model<IAddress> implements IAddress {
   
   public id!: number;
   public location!: string;

@@ -1,18 +1,8 @@
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
+import { IImage } from '../../interfaces/IImage';
 
-export interface ImageAttributes{
-
-  id: number;
-  file: string;
-  productId: number;
-
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
-}
-
-class Image extends Model<ImageAttributes> implements ImageAttributes {
+class Image extends Model<IImage> implements IImage {
   
   public id!: number;
   public file!: string;

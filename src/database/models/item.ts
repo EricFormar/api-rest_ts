@@ -1,21 +1,9 @@
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
-import Order from './order';
 import Product from './product';
+import { IItem } from '../../interfaces/IItem';
 
-export interface ItemAttributes{
-
-  id: number;
-  quantity: number;
-  productId: number;
-  orderId: number;
-
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
-}
-
-class Item extends Model<ItemAttributes> implements ItemAttributes {
+class Item extends Model<IItem> implements IItem {
   
   public id!: number;
   public quantity!: number;

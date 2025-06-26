@@ -1,17 +1,8 @@
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
+import { ISection } from '../../interfaces/ISection';
 
-export interface SectionAttributes{
-
-  id: number;
-  name: string;
-  
-  createdAt: Date;
-  updatedAt?: Date;
-  deletedAt?: Date;
-}
-
-class Section extends Model<SectionAttributes> implements SectionAttributes {
+class Section extends Model<ISection> implements ISection {
   
   public id!: number;
   public name!: string;

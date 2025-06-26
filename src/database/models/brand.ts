@@ -1,19 +1,8 @@
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
+import { IBrand } from '../../interfaces/IBrand';
 
-export interface BrandAttributes{
-
-  id: number;
-  name: string;
-  image: string | null;
-
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
-  
-}
-
-class Brand extends Model<BrandAttributes> implements BrandAttributes {
+class Brand extends Model<IBrand> implements IBrand {
   
   public id!: number;
   public name!: string;

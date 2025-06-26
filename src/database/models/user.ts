@@ -1,24 +1,8 @@
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
+import { IUser } from '../../interfaces/IUser';
 
-export interface UserAttributes {
-  id: number;
-  name: string;
-  surname: string;
-  email: string;
-  password: string;
-  image?: string;
-  token?: string;
-  locked: boolean;
-  validated: boolean;
-  rolId: number;
-
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
-}
-
-class User extends Model<UserAttributes> implements UserAttributes {
+class User extends Model<IUser> implements IUser {
   public id!: number;
   public name!: string;
   public surname!: string;

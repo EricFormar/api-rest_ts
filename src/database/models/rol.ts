@@ -1,17 +1,8 @@
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
+import { IRol } from '../../interfaces/IRol';
 
-export interface RolAttributes{
-
-  id: number;
-  name: string;
-
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
-}
-
-class Rol extends Model<RolAttributes> implements RolAttributes {
+class Rol extends Model<IRol> implements IRol {
   
   public id!: number;
   public name!: string;

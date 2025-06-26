@@ -5,25 +5,9 @@ import Brand from './brand';
 import Category from './category';
 import SubCategory from './subcategory';
 import Image from './image';
+import { IProduct } from '../../interfaces/IProduct';
 
-export interface ProductAttributes{
-
-  id: number;
-  name: string;
-  price: number;
-  discount : number;
-  description : string;
-  brandId : number;
-  categoryId : number;
-  subcategoryId : number;
-  sectionId: number;
-
-  updatedAt?: Date;
-  deletedAt?: Date;
-  createdAt?: Date;
-}
-
-class Product extends Model<ProductAttributes> implements ProductAttributes {
+class Product extends Model<IProduct> implements IProduct {
   
   public id!: number;
   public name!: string;

@@ -1,19 +1,9 @@
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
 import SubCategory from './subcategory';
+import { ICategory } from '../../interfaces/ICategory';
 
-export interface CategoryAttributes{
-
-  id: number;
-  name: string;
-  image: string;
-
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
-}
-
-class Category extends Model<CategoryAttributes> implements CategoryAttributes {
+class Category extends Model<ICategory> implements ICategory {
   
   public id!: number;
   public name!: string;

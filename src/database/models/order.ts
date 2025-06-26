@@ -3,20 +3,9 @@ import connection from '../connection';
 import User from './user';
 import Status from './status';
 import Item from './item';
+import { IOrder } from '../../interfaces/IOrder';
 
-export interface OrderAttributes{
-
-  id: number;
-  total: number;
-  statusId: number;
-  userId: number;
-  
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
-}
-
-class Order extends Model<OrderAttributes> implements OrderAttributes {
+class Order extends Model<IOrder> implements IOrder {
   
   public id!: number;
   public total!: number;

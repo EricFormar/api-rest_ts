@@ -1,18 +1,8 @@
 import { Model, DataTypes } from 'sequelize';
 import connection from '../connection';
+import { IStatus } from '../../interfaces/IStatus';
 
-export interface StatusAttributes{
-
-  id: number;
-  name: string;
-  
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
-  
-}
-
-class Status extends Model<StatusAttributes> implements StatusAttributes {
+class Status extends Model<IStatus> {
   
   public id!: number;
   public name!: string;
