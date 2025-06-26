@@ -22,10 +22,6 @@ export class ProductService {
 
    // Create product
     async createProduct(product: Omit<IProduct, 'id' | 'createdAt' | 'updatedAt'>) {
-      
-      if(Object.keys(product).every(key => product[key as keyof typeof product] === "")){
-        throw new BadRequestError('No se ha podido crear el producto. Faltan datos.');
-      }
 
       for (const key in product) {
          if(product[key as keyof typeof product] === ""){
