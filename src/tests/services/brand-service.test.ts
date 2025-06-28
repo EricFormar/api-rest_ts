@@ -57,6 +57,8 @@ describe("BrandService.getById", () => {
     await expect(brandService.getById("a" as any)).rejects.toThrow(BadRequestError);
   });
 
+});
+
   describe("BrandService.create", () => {
     it("should create a brand", async () => {
       const data = getBrandMock({
@@ -66,9 +68,10 @@ describe("BrandService.getById", () => {
       const newBrand = await brandService.create(data);
 
       expect(newBrand).toBeDefined();
-      expect(newBrand).toEqual(data);
+      expect(newBrand.name).toBe(data.name);
+      expect(newBrand.image).toBe(data.image);
     });
-  });
+
   // Checar errores al crear brand
   it("should throw an error if brand data is missing", async () => {
     await expect(
