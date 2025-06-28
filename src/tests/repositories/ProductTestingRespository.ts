@@ -49,10 +49,10 @@ export class ProductTestingRespository implements IProductRepository {
         let productsFiltered = [...this.products]
 
         if(data.name){
-            productsFiltered = productsFiltered.filter(product => product.name.toLowerCase().includes(data.name?.toLowerCase() || ''));
+            productsFiltered = productsFiltered.filter(product => product.name.toLowerCase().includes(data.name!.toLowerCase()));
         }
         if(data.description){
-            productsFiltered = productsFiltered.filter(product => product.description.toLowerCase().includes(data.description?.toLowerCase() || ''));
+            productsFiltered = productsFiltered.filter(product => product.description.toLowerCase().includes(data.description!.toLowerCase()));
         }
         if(data.subcategoryId){
             productsFiltered = productsFiltered.filter(product => product.subcategoryId === data.subcategoryId);
@@ -72,8 +72,5 @@ export class ProductTestingRespository implements IProductRepository {
 
     async count() : Promise<number> {
         return this.products.length;
-    }
-    async findByCategoryId(categoryId: number) : Promise<IProduct[]> {
-        return this.products.filter(product => product.categoryId === categoryId);
     }
 }
