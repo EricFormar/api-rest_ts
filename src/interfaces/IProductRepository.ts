@@ -8,5 +8,4 @@ export interface IProductRepository {
     delete(id: number): Promise<boolean>;
     search(data: Partial<IProduct>): Promise<IProduct[]>;
     count(): Promise<number>;
-    findByCategoryId(categoryId: number): Promise<IProduct[]>;
 }
