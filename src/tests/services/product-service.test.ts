@@ -128,7 +128,7 @@ describe("ProductService.deleteProduct", () => {
 });
 
 describe("ProductService.searchProducts", () => {
-  it("should search for products", async () => {
+  it("should search for products by name", async () => {
     const products = [
       getProductMock({ id: 1, name: "any product", price: 100 }),
       getProductMock({ id: 2, name: "other product", price: 200 }),
@@ -146,13 +146,114 @@ describe("ProductService.searchProducts", () => {
     expect(result).toEqual([products[1], products[2]]);
   });
 
+  it("should search for products by description", async () => {
+    const products = [
+      getProductMock({ id: 1, name: "any product", price: 100 }),
+      getProductMock({ id: 2, name: "other product", price: 200 }),
+      getProductMock({ id: 3, name: "other product", price: 300 }),
+      getProductMock({ id: 4, description: "some description", price: 300 }),
+      getProductMock({ id: 5, description: "some description", price: 300 }),
+    ];
+
+    mockProductRepository = new ProductTestingRespository(products);
+    productService = new ProductService(mockProductRepository);
+    const result = await productService.searchProducts({
+      description: "some description",
+    });
+
+    expect(result).toBeDefined();
+    expect(result.length).toBe(2);
+    expect(result).toEqual([products[3], products[4]]);
+  });
+
+  it("should search for products by category", async () => {
+    const products = [
+      getProductMock({ id: 1, name: "any product", categoryId: 1 }),
+      getProductMock({ id: 2, name: "other product", categoryId: 2 }),
+      getProductMock({ id: 3, name: "other product", categoryId: 2 }),
+    ];
+
+    mockProductRepository = new ProductTestingRespository(products);
+    productService = new ProductService(mockProductRepository);
+    const result = await productService.searchProducts({
+      categoryId: 2,
+    });
+
+    expect(result).toBeDefined();
+    expect(result.length).toBe(2);
+    expect(result).toEqual([products[1], products[2]]);
+  });
+
+  it("should search for products by section", async () => {
+    const products = [
+      getProductMock({ id: 1, name: "any product", sectionId: 1 }),
+      getProductMock({ id: 2, name: "other product", sectionId: 2 }),
+      getProductMock({ id: 3, name: "other product", sectionId: 2 }),
+    ];
+
+    mockProductRepository = new ProductTestingRespository(products);
+    productService = new ProductService(mockProductRepository);
+    const result = await productService.searchProducts({
+      sectionId: 2,
+    });
+
+    expect(result).toBeDefined();
+    expect(result.length).toBe(2);
+    expect(result).toEqual([products[1], products[2]]);
+  });
+
+  it("should search for products by subcategory", async () => {
+    const products = [
+      getProductMock({ id: 1, name: "any product", subcategoryId: 1 }),
+      getProductMock({ id: 2, name: "other product", subcategoryId: 2 }),
+      getProductMock({ id: 3, name: "other product", subcategoryId: 2 }),
+    ];
+
+    mockProductRepository = new ProductTestingRespository(products);
+    productService = new ProductService(mockProductRepository);
+    const result = await productService.searchProducts({
+      subcategoryId: 2,
+    });
+
+    expect(result).toBeDefined();
+    expect(result.length).toBe(2);
+    expect(result).toEqual([products[1], products[2]]);
+  });
+
+  it("should search for products by brand", async () => {
+    const products = [
+      getProductMock({ id: 1, name: "any product", brandId: 1 }),
+      getProductMock({ id: 2, name: "other product", brandId: 2 }),
+      getProductMock({ id: 3, name: "other product", brandId: 2 }),
+    ];
+
+    mockProductRepository = new ProductTestingRespository(products);
+    productService = new ProductService(mockProductRepository);
+    const result = await productService.searchProducts({
+      brandId: 2,
+    });
+
+    expect(result).toBeDefined();
+    expect(result.length).toBe(2);
+    expect(result).toEqual([products[1], products[2]]);
+  });
+
   it("should return an empty array if no products are found", async () => {
     mockProductRepository = new ProductTestingRespository([]);
     productService = new ProductService(mockProductRepository);
     const result = await productService.searchProducts({
-      name: "other product",
+      name: "none product",
     });
 
     expect(result).toEqual([]);
   });
 });
+
+describe("ProductService.count", () => {
+  it("should count products", async () => {
+    const result = await productService.count()
+
+    expect(result).toBeDefined()
+    expect(result).toBe(3)
+  })
+})
