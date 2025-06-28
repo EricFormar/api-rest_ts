@@ -8,7 +8,7 @@ export default defineConfig({
       provider: 'v8', // o 'istanbul'
       reporter: ['text', 'json', 'html'],
       include: ['src/**/*.ts'],
-      exclude: ['src/app.ts', 'src/config/*', 'src/routes/*','src/interfaces/**/*.ts'] // Excluir archivos que no requieren cobertura de tests unitarios
+      exclude: ['src/app.ts', 'src/config/*', 'src/routes/*','src/interfaces/**/*.ts','src/data/**'] // Excluir archivos que no requieren cobertura de tests unitarios
     },
     setupFiles: ['./src/database/setup.ts'], // Archivo para configuración global de tests
   },
