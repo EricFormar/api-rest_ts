@@ -1,6 +1,6 @@
 import { IBrand } from "../../interfaces/IBrand";
 
-export const getBrandMock =  (data : Partial<IBrand>) => {
+export const getBrandMock =  (data : Partial<IBrand>) : IBrand => {
   
   const {id = 1, name, image} = data;
       const newBrand = {
