@@ -1,9 +1,9 @@
 'use strict';
 
 import { QueryInterface, Sequelize } from "sequelize";
-import { CategoryAttributes } from "../models/category";
-import { SubCategoryAttributes } from "../models/subcategory";
-import categoriesData from "../../data/categories";
+import categoriesJSON from "../../data/categories.json";
+import { ICategory } from "../../interfaces/ICategory";
+import { ISubCategory } from "../../interfaces/ISubcategory";
 
 /** @type {import('sequelize-cli').Migration} */
 
@@ -12,13 +12,13 @@ export = {
     
     const result  = await queryInterface.sequelize.query(
       'SELECT id, name FROM Categories'
-    ) as unknown as [CategoryAttributes[],[]];
-    const categories : CategoryAttributes[] = result[0];    
-    const subcategories : Partial<SubCategoryAttributes>[] = [];
+    ) as unknown as [ICategory[],[]];
+    const categories : ICategory[] = result[0];    
+    const subcategories : Partial<ISubCategory>[] = [];
     
-    categoriesData.forEach(category => {
+    categoriesJSON.forEach(category => {
       // Find the corresponding category ID
-      const dbCategory = categories.find((c : CategoryAttributes) => c.name === category.name);
+      const dbCategory = categories.find((c : ICategory) => c.name === category.name);
       
       if (dbCategory && category.subcategories) {
         category.subcategories.forEach(subcategory => {

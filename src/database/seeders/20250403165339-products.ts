@@ -1,10 +1,10 @@
 'use strict';
 
 import { QueryInterface, Sequelize } from "sequelize";
-import { CategoryAttributes } from "../models/category";
-import { SubCategoryAttributes } from "../models/subcategory";
-import { BrandAttributes } from "../models/brand";
-import productsData from '../../data/products';
+import productsJSON from '../../data/products.json';
+import { ICategory } from "../../interfaces/ICategory";
+import { ISubCategory } from "../../interfaces/ISubcategory";
+import { IBrand } from "../../interfaces/IBrand";
 
 /** @type {import('sequelize-cli').Migration} */
 export = {
@@ -13,17 +13,17 @@ export = {
 
     const [categories] = await queryInterface.sequelize.query(
       'SELECT id, name FROM Categories',
-    ) as unknown as [CategoryAttributes[], []];
+    ) as unknown as [ICategory[], []];
 
     const [subcategories] = await queryInterface.sequelize.query(
       'SELECT id, name FROM Subcategories'
-    ) as unknown as [SubCategoryAttributes[], []];
+    ) as unknown as [ISubCategory[], []];
 
     const [brands] = await queryInterface.sequelize.query(
       'SELECT id, name FROM Brands',
-    ) as unknown as [BrandAttributes[], []];
+    ) as unknown as [IBrand[], []];
 
-    const products = productsData.map(product => {
+    const products = productsJSON.map(product => {
       const category = categories.find(cat => cat.name === product.category);
       const subcategory = subcategories.find(sub => sub.name === product.subcategory);
       const brand = brands.find(b => product.name.includes(b.name));

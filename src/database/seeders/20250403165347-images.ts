@@ -1,17 +1,17 @@
 'use strict';
 
 import { QueryInterface, Sequelize } from "sequelize";
-import { ImageAttributes } from "../models/image";
-import productsData from "../../data/products"
+import productsJSON from "../../data/products.json"
+import { IImage } from "../../interfaces/IImage";
 
 /** @type {import('sequelize-cli').Migration} */
 
 export = {
   async up (queryInterface : QueryInterface, Sequelize: Sequelize) {
   
-    const images : Omit<ImageAttributes, 'id'>[] = [];
+    const images : Omit<IImage, 'id'>[] = [];
     
-    productsData.forEach(product => {
+    productsJSON.forEach(product => {
           images.push({
             file: product.image,
             productId: product.id,

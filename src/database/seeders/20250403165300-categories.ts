@@ -1,13 +1,13 @@
 'use strict';
 
 import { QueryInterface, Sequelize } from "sequelize";
-import categoriesData from "../../data/categories";
+import categoriesJSON from "../../data/categories.json";
 
 /** @type {import('sequelize-cli').Migration} */
 
 export = {
   async up (queryInterface: QueryInterface, Sequelize : Sequelize) {
-    const categories = categoriesData.map(category => ({
+    const categories = categoriesJSON.map(category => ({
       name: category.name,
       image: null,
       createdAt: new Date(),
