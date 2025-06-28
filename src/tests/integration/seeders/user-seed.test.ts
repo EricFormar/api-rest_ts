@@ -1,11 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import migrationRol from "../../database/migrations/20250607141656-rol";
-import migration from "../../database/migrations/20250607141756-user";
-import seedRol from "../../database/seeders/20250405202114-roles";
-import seed from "../../database/seeders/20250405202114-users";
-import sequelizeConnection from "../../database/connection";
-import { DataTypesTest, queryInterface } from "../../database/setup";
-import User from "../../database/models/user";
+import migrationRol from "../../../database/migrations/20250607141656-rol";
+import migration from "../../../database/migrations/20250607141756-user";
+import seedRol from "../../../database/seeders/20250405202114-roles";
+import seed from "../../../database/seeders/20250405202114-users";
+import sequelizeConnection from "../../../database/connection";
+import { DataTypesTest, queryInterface } from "../../../database/setup";
+import User from "../../../database/models/user";
 
 describe("Seed User", () => {
     beforeEach(async () => {

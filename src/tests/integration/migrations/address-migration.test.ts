@@ -1,7 +1,7 @@
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { queryInterface, DataTypesTest } from "../../database/setup";
-import migration from "../../database/migrations/20250607142315-address";
+import { queryInterface, DataTypesTest } from "../../../database/setup";
+import migration from "../../../database/migrations/20250607142315-address";
 import { QueryInterface } from "sequelize";
 
 

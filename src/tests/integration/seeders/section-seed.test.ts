@@ -1,9 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import seed from "../../database/seeders/20250403165301-sections";
-import migration from "../../database/migrations/20250607110120-section";
-import { DataTypesTest, queryInterface } from "../../database/setup";
-import sequelizeConnection from "../../database/connection";
-import Section from "../../database/models/section";
+import seed from "../../../database/seeders/20250403165301-sections";
+import migration from "../../../database/migrations/20250607110120-section";
+import { DataTypesTest, queryInterface } from "../../../database/setup";
+import sequelizeConnection from "../../../database/connection";
+import Section from "../../../database/models/section";
 
 describe("Section Seed", () => {
 

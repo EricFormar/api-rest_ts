@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { queryInterface, DataTypesTest } from "../../database/setup";
-import migration from "../../database/migrations/20250607110250-brand";
+import { queryInterface, DataTypesTest } from "../../../database/setup";
+import migration from "../../../database/migrations/20250607142616-status";
 
-describe("Migration: Create Brands Table", () => {
+describe("Migration: Create Statuses Table", () => {
   beforeEach(async () => {
     await migration.up(queryInterface, DataTypesTest);
   });
@@ -11,13 +11,13 @@ describe("Migration: Create Brands Table", () => {
     await migration.down(queryInterface, DataTypesTest);
   });
 
-  it("should create the Brands table with correct columns", async () => {
+  it("should create the Statuses table with correct columns", async () => {
 
     const tables = await queryInterface.showAllTables();
-    expect(tables).toContain("Brands");
+    expect(tables).toContain("Statuses");
 
     const tableDescription = (await queryInterface.describeTable(
-      "Brands"
+      "Statuses"
     )) as Record<string, any>;
 
     expect(tableDescription.id).toBeDefined();
@@ -26,9 +26,6 @@ describe("Migration: Create Brands Table", () => {
 
     expect(tableDescription.name).toBeDefined();
     expect(tableDescription.name.type).toMatch(/VARCHAR\(255\)/i);
-
-    expect(tableDescription.image).toBeDefined();
-    expect(tableDescription.image.type).toMatch(/VARCHAR\(255\)/i);
 
     expect(tableDescription.createdAt).toBeDefined();
     expect(tableDescription.createdAt.type).toMatch(/DATETIME/i);
@@ -43,14 +40,14 @@ describe("Migration: Create Brands Table", () => {
     expect(tableDescription.deletedAt.allowNull).toBe(true);
   });
 
-  it("should drop the Brands table when migrating down", async () => {
+  it("should drop the Statuses table when migrating down", async () => {
 
     let tables = await queryInterface.showAllTables();
-    expect(tables).toContain("Brands");
+    expect(tables).toContain("Statuses");
 
     await migration.down(queryInterface, DataTypesTest);
 
     tables = await queryInterface.showAllTables();
-    expect(tables).not.toContain("Brands");
+    expect(tables).not.toContain("Statuses");
   });
 });

@@ -1,10 +1,8 @@
-
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { queryInterface, DataTypesTest } from "../../database/setup";
-import migration from "../../database/migrations/20250607142724-order";
+import { queryInterface, DataTypesTest } from "../../../database/setup";
+import migration from "../../../database/migrations/20250607110406-subcategory";
 
-describe("Migration: Create Orders Table", () => {
-  
+describe("Migration: Create Subcategories Table", () => {
   beforeEach(async () => {
     await migration.up(queryInterface, DataTypesTest);
   });
@@ -13,27 +11,27 @@ describe("Migration: Create Orders Table", () => {
     await migration.down(queryInterface, DataTypesTest);
   });
 
-  it("should create the Orders table with correct columns", async () => {
+  it("should create the Subcategories table with correct columns", async () => {
     
     const tables = await queryInterface.showAllTables();
-    expect(tables).toContain("Orders");
+    expect(tables).toContain("Subcategories");
 
     const tableDescription = (await queryInterface.describeTable(
-      "Orders"
+      "Subcategories"
     )) as Record<string, any>;
 
     expect(tableDescription.id).toBeDefined();
     expect(tableDescription.id.type).toMatch(/INTEGER/i);
     expect(tableDescription.id.primaryKey).toBe(true);
 
-    expect(tableDescription.total).toBeDefined();
-    expect(tableDescription.total.type).toMatch(/INTEGER/i);
+    expect(tableDescription.name).toBeDefined();
+    expect(tableDescription.name.type).toMatch(/VARCHAR\(255\)/i);
 
-    expect(tableDescription.statusId).toBeDefined();
-    expect(tableDescription.statusId.type).toMatch(/INTEGER/i);
-    
-    expect(tableDescription.userId).toBeDefined();
-    expect(tableDescription.userId.type).toMatch(/INTEGER/i);
+    expect(tableDescription.image).toBeDefined();
+    expect(tableDescription.image.type).toMatch(/VARCHAR\(255\)/i);
+
+    expect(tableDescription.categoryId).toBeDefined();
+    expect(tableDescription.categoryId.type).toMatch(/INTEGER/i);
 
     expect(tableDescription.createdAt).toBeDefined();
     expect(tableDescription.createdAt.type).toMatch(/DATETIME/i);
@@ -46,17 +44,16 @@ describe("Migration: Create Orders Table", () => {
     expect(tableDescription.deletedAt).toBeDefined();
     expect(tableDescription.deletedAt.type).toMatch(/DATETIME/i);
     expect(tableDescription.deletedAt.allowNull).toBe(true);
-
   });
 
-  it("should drop the Orders table when migrating down", async () => {
+  it("should drop the Subcategories table when migrating down", async () => {
     
     let tables = await queryInterface.showAllTables();
-    expect(tables).toContain("Orders");
+    expect(tables).toContain("Subcategories");
   
     await migration.down(queryInterface, DataTypesTest);
   
     tables = await queryInterface.showAllTables();
-    expect(tables).not.toContain("Orders");
+    expect(tables).not.toContain("Subcategories");
   });
 });

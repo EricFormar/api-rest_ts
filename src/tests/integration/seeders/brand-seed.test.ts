@@ -1,9 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import migration from "../../database/migrations/20250607110250-brand";
-import seed from "../../database/seeders/20250403165300-brands";
-import sequelizeConnection from "../../database/connection";
-import { DataTypesTest, queryInterface } from "../../database/setup";
-import Brand from "../../database/models/brand";
+import migration from "../../../database/migrations/20250607110250-brand";
+import seed from "../../../database/seeders/20250403165300-brands";
+import sequelizeConnection from "../../../database/connection";
+import { DataTypesTest, queryInterface } from "../../../database/setup";
+import Brand from "../../../database/models/brand";
 
 describe("Seed Brand", () => {
     beforeEach(async () => {

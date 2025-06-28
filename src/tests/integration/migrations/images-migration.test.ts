@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { queryInterface, DataTypesTest } from "../../database/setup";
-import migration from "../../database/migrations/20250607111049-image";
+import { queryInterface, DataTypesTest } from "../../../database/setup";
+import migration from "../../../database/migrations/20250607111049-image";
 
 describe("Migration: Create Images Table", () => {
   beforeEach(async () => {
