@@ -55,4 +55,8 @@ export class ProductService {
    async searchProducts(data: Partial<IProduct>) {      
       return this.productRepository.search(data);
    }
+
+   async count(){
+      return this.productRepository.count()
+   }
 }
